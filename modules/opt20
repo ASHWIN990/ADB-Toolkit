@@ -1,0 +1,4 @@
+#!/bin/bash
+echo -e "\e[1;93mCOPYING ALL THE DOWNLOADS FROM THE PHONE"
+adb pull /sdcard/Download
+bash modules/funtion.sh

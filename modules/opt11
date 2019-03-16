@@ -1,0 +1,3 @@
+#!/bin/bash
+bash bug-report/.bug-report.sh
+bash modules/funtion.sh

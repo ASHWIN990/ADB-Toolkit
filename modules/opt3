@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo adb reboot
+bash modules/funtion.sh

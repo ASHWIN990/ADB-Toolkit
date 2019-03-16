@@ -1,0 +1,5 @@
+#!/bin/bash
+echo -e "\e[1;93mCOPYING ALL THE PHOTOS FROM THE PHONE"
+adb pull /sdcard/DCIM
+
+bash modules/funtion.sh

@@ -1,0 +1,4 @@
+#!/bin/bash
+time=$(date +"%T")
+bash screenrecord/.screenrecord.sh screenrecord$time.sh
+bash modules/funtion.sh

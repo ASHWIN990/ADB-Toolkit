@@ -1,0 +1,6 @@
+#!/bin/bash
+read -p $'\e[1;93mENTER THE PACKAGE NAME YOU WANT TO UNINSTALL : \e[1;92m' uninstall
+echo
+adb uninstall $uninstall
+echo
+bash modules/funtion.sh

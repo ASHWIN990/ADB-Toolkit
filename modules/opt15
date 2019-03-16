@@ -1,0 +1,7 @@
+#!/bin/bash
+logcat=$(adb logcat)
+echo
+echo -e "\e[1;93$logcat"
+echo
+echo
+bash modules/funtion.sh

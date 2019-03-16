@@ -1,0 +1,5 @@
+#!/bin/bash
+echo -e "\e[1;93m"
+adb shell dumpsys
+echo -e "\e[0m"
+bash modules/funtion.sh

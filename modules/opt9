@@ -1,0 +1,5 @@
+#!/bin/bash
+meminfo=$(adb shell dumpsys meminfo)
+echo -e "\e[1;93m$meminfo"
+echo
+bash modules/funtion.sh

@@ -1,0 +1,4 @@
+#!/bin/bash
+echo -e "\e[1;93mCOPYING ALL THE DATA OF WhatsApp FROM THE PHONE"
+adb pull /sdcard/WhatsApp
+bash modules/funtion.sh

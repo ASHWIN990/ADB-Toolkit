@@ -1,0 +1,14 @@
+#!/bin/bash
+dev_ip=$(adb shell ip route | awk '{print $9}')
+adb tcpip 5555
+adb_ip=$(adb connect $dev_ip)
+echo -e "\e[1;92m$adb_ip"
+while true; do
+  read -p $'\e[93;1mDo you want to launch the shell\e[1;97m (Y/N) \e[93;1m? : \e[1;91m' yn
+  case $yn in
+  [Yy]* ) echo ;echo -e "\e[1;0m";adb shell;;
+  [Nn]* )  echo && bash modules/funtion.sh ;exit;;
+  * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
+  esac
+  done
+bash modules/funtion.sh

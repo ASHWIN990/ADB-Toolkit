@@ -1,0 +1,5 @@
+#!/bin/bash
+cpuinfo=$(adb shell dumpsys cpuinfo)
+echo -e "\e[1;93m$cpuinfo"
+echo
+bash modules/funtion.sh

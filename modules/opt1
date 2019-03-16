@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo adb devices
+bash modules/funtion.sh

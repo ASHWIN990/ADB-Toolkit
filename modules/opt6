@@ -1,0 +1,3 @@
+#!/bin/Bash
+sudo adb shell
+bash modules/funtion.sh

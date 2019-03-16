@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo adb reboot bootloader
+bash modules/funtion.sh

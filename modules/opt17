@@ -1,0 +1,4 @@
+#!/bin/bash
+time=$(date +"%T")
+bash screenshot/.screenshot.sh screenshot$time
+bash modules/funtion.sh

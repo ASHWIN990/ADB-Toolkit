@@ -1,0 +1,11 @@
+#!/bin/bash
+echo
+echo -e "\e[1;93m/home/user/Desktop/example.apk]"
+echo
+read -p $'\e[1;93mENTER THE PATH OF THE APK : \e[1;92m' INSTAL
+inst=$(adb install  $INSTAL)
+echo
+echo -e "\e[1;92mINSTALLING THE PACKAGE \e[1;91m$inst"
+echo
+echo
+bash modules/funtion.sh

@@ -1,0 +1,4 @@
+#!/bin/bash
+all_pack=$(adb shell 'pm list packages -f')
+echo -e "\e[1;93m$all_pack"
+bash modules/funtion.sh
