@@ -1,3 +1,3 @@
 #!/bin/bash
 
-adb bugreport
+sudo adb bugreport
