@@ -8,7 +8,6 @@
 echo "ADB-Toolkit"
 echo
 echo
-echo
 
 if [ $(id -u) -ne 0 ]; then
         echo "THIS SCRIPT MUST BE RAN AS ROOT"
