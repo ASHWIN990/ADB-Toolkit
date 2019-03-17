@@ -7,6 +7,11 @@
 
 ADB-Toolkit is a bash script with around 20 to 22 options to chose which comes in handy to work with ADB, Hope you Enjoy! And mark star it really encourages me.
 
+## Note
+
+Before using this tool you must enable Usb-Debugging from the devloper settings from the Android setting and then you are good to go.
+
+
 ## Installation
 
 
