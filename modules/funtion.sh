@@ -301,3 +301,6 @@ if [ "$options" = "23" ]
   exit
 
 fi
+
+
+bash modules/funtion.sh
