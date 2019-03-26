@@ -36,6 +36,9 @@ fi
 
 clear
 
+
+banner () {
+
 echo -e "\e[1;93m
 
  █████╗ ██████╗ ██████╗               ████████╗ ██████╗  ██████╗ ██╗     ██╗  ██╗██╗████████╗
@@ -46,5 +49,12 @@ echo -e "\e[1;93m
 ╚═╝  ╚═╝╚═════╝ ╚═════╝                  ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝
 
 \e[0m"
+
+}
+
+banner
+
+echo
+echo -e "\e[93mMade with LOVE by \e[1;91mASHWINI SAHU\e[0m"
 
 bash modules/funtion.sh
