@@ -32,7 +32,7 @@ echo -e "\e[1;93m6.   \e[1;92mSTART A INTERACTIVE SHELL                        \
 echo -e "\e[1;93m7.   \e[1;92mGET SYSTEM INFORMATION                           \e[1;93m27.  \e[1;92mCHECK IS PHONE ROOTED OR NOT"
 echo -e "\e[1;93m8.   \e[1;92mGET CPU INFO                                     \e[1;93m28.  \e[1;92mHANG THE PHONE ( Rooted Phone ) "
 echo -e "\e[1;93m10.  \e[1;92mGET PHONE DETAILS                                \e[1;93m29.  \e[1;92mSEND SMS FROM THE PHONE "
-echo -e "\e[1;93m11.  \e[1;92mCAPTURE BUG REPORT                               \e[1;93m30.  \e[1;92mMAKE CALL FROM THE PHONE "
+echo -e "\e[1;93m11.  \e[1;92mCAPTURE BUG REPORT"
 echo -e "\e[1;93m12.  \e[1;92mINSTALL AN PACAKAGE 'apk'"
 echo -e "\e[1;93m13.  \e[1;92mUNINSTALL AN PACKAGE"
 echo -e "\e[1;93m14.  \e[1;92mLIST ALL INSTALLED PACKAGE"
@@ -383,17 +383,6 @@ if [ "$options" = "29" ]
 
     echo -e
     bash modules/opt29
-
-
-fi
-
-if [ "$options" = "30" ]
-
-  then
-
-
-    echo -e
-    bash modules/opt30
 
 
 fi
