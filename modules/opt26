@@ -1,0 +1,7 @@
+#!/bin/bash
+
+read -p $'\e[1;93mEnter the Package name : \e[0m' package_name
+
+adb shell monkey -p $package_name -c android.intent.category.LAUNCHER 1 >/dev/null 2>&1 | echo -e "\e[1;93mLaunching the APPLICATION.\e[0m"
+
+bash modules/funtion.sh

@@ -1,23 +1,4 @@
 #!/bin/bash
-
-echo
-echo -e "\e[24;37mAUTHOUR NAME : \e[1;4;91mASHWINI SAHU\e[0m"
-echo -e
-
-echo -e "\e[37mTOOL NAME : \e[4;91mADB-Toolkit\e[0m"
-echo -e
-
-echo -e "\e[37mDATE : \e[4;91m12/01/2019\e[0m"
-echo -e
-
-echo -e "\e[37mGITHUB : \e[4;91mhttps://github.com/ASHWIN990\e[0m"
-echo -e
-
-echo -e "\e[37mNOTE : \e[91mPlease don't use for wrong intension just use for educational purpose cause its an educational tool.\e[0m"
-echo -e
-
-echo -e "\e[37mWRITTEN LANGUAGE : \e[4;91mBASH\e[0m"
-echo
-echo
-echo
+echo -e "\e[1;93mCOPYING ALL THE DATA OF FROM THE PHONE"
+adb pull /sdcard
 bash modules/funtion.sh

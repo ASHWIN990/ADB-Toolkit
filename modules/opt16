@@ -1,5 +1,7 @@
 #!/bin/bash
-dev_ip=$(adb shell ip route | awk '{print $9}')
+echo -e "\e[1;93mHere are list of the IP i find in your device select the right ine and write below : \e[0m"
+adb shell ip route | awk '{print $9}'
+read -p $'\e[1;93m\n\nEnter the IP from above or any open ADB port IP : \e[0m' dev_ip
 adb tcpip 5555
 adb_ip=$(adb connect $dev_ip)
 echo -e "\e[1;92m$adb_ip"

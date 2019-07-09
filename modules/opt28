@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo -e "\e[1;92mHANGING THE PHONE IF IT IS ROOTED and Permission is granted\n"
+adb shell am hang >/dev/null 2>&1 | echo -e "\e[1;93mHANGING THE PHONE\e[0m"
+bash modules/funtion.sh

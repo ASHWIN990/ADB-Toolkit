@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo -e "\e[1;93mEnter  ' \e[1;91msu '  \e[1;93min below shell of the device if it show ' Permission denied ' then the device is not rooted or you may have to give the Permission by unlocking it via installed ROOT Manager "
+echo -e "\n\e[1;93mEnter ' \e[1;91mexit ' \e[1;93mwhen you want to leave the shell\e[1;92m"
+echo
+adb shell
+bash modules/funtion.sh

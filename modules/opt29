@@ -1,0 +1,8 @@
+#!/bin/bash
+
+read -p $'\e[1;93mEnter the Phone number with country code in it : \e[0m' phone_no
+read -p $'\e[1;93m\n\nWrite the SMS body here : \e[0m' sms_body
+adb shell am start -a android.intent.action.SENDTO -d sms:$phone_no --es sms_body "$sms_body" --ez exit_on_sent true >/dev/null 2>&1 | echo -e "\e[1;93mSENDING THE SMS\e[0m"
+adb shell input keyevent 22 >/dev/null 2>&1
+adb shell input keyevent 66 >/dev/null 2>&1
+bash modules/funtion.sh

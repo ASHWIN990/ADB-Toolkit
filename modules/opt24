@@ -1,0 +1,8 @@
+#!/bin/bash
+
+read -p $'\e[1;93mEnter the path of file or folder which you want to put in the device : \e[0m' file_to_put
+read -p $'\e[1;93m\n\nEnter the path in which you want to put in device : \e[0m' path_to_put
+
+adb push $file_to_put $path_to_put
+
+bash modules/funtion.sh

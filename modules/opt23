@@ -1,0 +1,4 @@
+#!/bin/bash
+read -p $'\e[1;93mEnter the path of file or folder which you want to copy : \e[0m' file_to_copy_path
+adb pull $file_to_copy_path
+bash modules/funtion.sh

@@ -1,23 +1,39 @@
 #!/bin/bash
 
+banner () {
+
+echo -e "\e[1;93m
+
+ █████╗ ██████╗ ██████╗               ████████╗ ██████╗  ██████╗ ██╗     ██╗  ██╗██╗████████╗
+██╔══██╗██╔══██╗██╔══██╗              ╚══██╔══╝██╔═══██╗██╔═══██╗██║     ██║ ██╔╝██║╚══██╔══╝
+███████║██║  ██║██████╔╝    █████╗       ██║   ██║   ██║██║   ██║██║     █████╔╝ ██║   ██║
+██╔══██║██║  ██║██╔══██╗    ╚════╝       ██║   ██║   ██║██║   ██║██║     ██╔═██╗ ██║   ██║
+██║  ██║██████╔╝██████╔╝                 ██║   ╚██████╔╝╚██████╔╝███████╗██║  ██╗██║   ██║
+╚═╝  ╚═╝╚═════╝ ╚═════╝                  ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝
+
+\e[0m"
+echo
+echo -e "\e[93mMade with LOVE by \e[1;91mASHWINI SAHU\e[0m"
+}
+
+banner
 echo -e
 echo -e
 echo -e "\e[1;4;91mCHOOSE THE OPTIONS GIVEN BELOW\e[0m"
 echo -e
 echo -e
-echo -e "\e[1;93m1.   \e[1;92mSHOW CONNECTED DEVICES"
-echo -e "\e[1;93m2.   \e[1;92mRESTART ADB SERVICE"
+echo -e "\e[1;93m1.   \e[1;92mSHOW CONNECTED DEVICES                           \e[1;93m24.  \e[1;92mPUT A FILE IN VICTIMS DEVICE "
+echo -e "\e[1;93m2.   \e[1;92mRESTART ADB SERVICE "
 echo -e "\e[1;93m3.   \e[1;92mREBOOT SYSTEM"
-echo -e "\e[1;93m4.   \e[1;92mREBOOT TO RECOVERY MODE"
-echo -e "\e[1;93m5.   \e[1;92mREBOOT TO FASTBOOT/BOOTLOADER MODE"
+echo -e "\e[1;93m4.   \e[1;92mREBOOT TO RECOVERY MODE                          \e[1;93m25.  \e[1;91mGO TO METASPLOIT SECTION "
+echo -e "\e[1;93m5.   \e[1;92mREBOOT TO FASTBOOT/BOOTLOADER MODE "
 echo
-echo -e "\e[1;93m6.   \e[1;92mSTART A INTERACTIVE SHELL"
-echo -e "\e[1;93m7.   \e[1;92mGET SYSTEM INFORMATION"
-echo -e "\e[1;93m8.   \e[1;92mGET CPU INFO"
-echo -e "\e[1;93m9.   \e[1;92mGET MEMORY INFO"
-echo -e "\e[1;93m10.  \e[1;92mGET PHONE DETAILS"
-echo -e "\e[1;93m11.  \e[1;92mCAPTURE BUG REPORT"
-echo -e "\e[1;93m12.  \e[1;92mINSTALL AN PACAKAGE (apk)"
+echo -e "\e[1;93m6.   \e[1;92mSTART A INTERACTIVE SHELL                        \e[1;93m26.  \e[1;92mLAUNCH AN APPLICATION "
+echo -e "\e[1;93m7.   \e[1;92mGET SYSTEM INFORMATION                           \e[1;93m27.  \e[1;92mCHECK IS PHONE ROOTED OR NOT"
+echo -e "\e[1;93m8.   \e[1;92mGET CPU INFO                                     \e[1;93m28.  \e[1;92mHANG THE PHONE ( Rooted Phone ) "
+echo -e "\e[1;93m10.  \e[1;92mGET PHONE DETAILS                                \e[1;93m29.  \e[1;92mSEND SMS FROM THE PHONE "
+echo -e "\e[1;93m11.  \e[1;92mCAPTURE BUG REPORT                               \e[1;93m30.  \e[1;92mMAKE CALL FROM THE PHONE "
+echo -e "\e[1;93m12.  \e[1;92mINSTALL AN PACAKAGE 'apk'"
 echo -e "\e[1;93m13.  \e[1;92mUNINSTALL AN PACKAGE"
 echo -e "\e[1;93m14.  \e[1;92mLIST ALL INSTALLED PACKAGE"
 echo -e "\e[1;93m15.  \e[1;92mSEE LIVE LOG OF DEVICE"
@@ -28,8 +44,8 @@ echo -e "\e[1;93m18.  \e[1;92mRECORD THE SCREEN ANONYMOUSLY"
 echo -e "\e[1;93m19.  \e[1;92mCOPY ALL THE CAMERA PHOTOS"
 echo -e "\e[1;93m20.  \e[1;92mCOPY ALL THE DOWNLOADS"
 echo -e "\e[1;93m21.  \e[1;92mCOPY ALL WHATSAPP DATA"
-echo -e "\e[1;93m22.  \e[1;92mABOUT AUTHOUR"
-echo -e "\e[1;93m23.  \e[1;92mEXIT"
+echo -e "\e[1;93m22.  \e[1;92mCOPY ALL DEVICE STORAGE                          \e[1;93mA.  \e[1;92mABOUT AUTHOUR "
+echo -e "\e[1;93m23.  \e[1;92mCOPY A SPECIFIED FILE OR FOLDER                  \e[1;93mE.  \e[1;92mEXIT or press Ctrl+c"
 echo -e
 echo -e
 read -p $'\e[1;4;91mSELECT ONE OF THE OPTIONS WITH THE RESPECTED NUMBER\e[0m\e[24;1;97m : ' options
@@ -298,28 +314,114 @@ if [ "$options" = "23" ]
 
   then
 
-  exit
+
+    echo -e
+    bash modules/opt23
+
 
 fi
 
+if [ "$options" = "24" ]
 
-banner () {
-
-echo -e "\e[1;93m
-
- █████╗ ██████╗ ██████╗               ████████╗ ██████╗  ██████╗ ██╗     ██╗  ██╗██╗████████╗
-██╔══██╗██╔══██╗██╔══██╗              ╚══██╔══╝██╔═══██╗██╔═══██╗██║     ██║ ██╔╝██║╚══██╔══╝
-███████║██║  ██║██████╔╝    █████╗       ██║   ██║   ██║██║   ██║██║     █████╔╝ ██║   ██║
-██╔══██║██║  ██║██╔══██╗    ╚════╝       ██║   ██║   ██║██║   ██║██║     ██╔═██╗ ██║   ██║
-██║  ██║██████╔╝██████╔╝                 ██║   ╚██████╔╝╚██████╔╝███████╗██║  ██╗██║   ██║
-╚═╝  ╚═╝╚═════╝ ╚═════╝                  ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝
-
-\e[0m"
-
-}
+  then
 
 
-clear && banner && bash modules/funtion.sh
+    echo -e
+    bash modules/opt24
+
+
+fi
+
+if [ "$options" = "25" ]
+
+  then
+
+
+    echo -e
+    clear && bash modules/funtion2.sh
+
+
+fi
+
+if [ "$options" = "26" ]
+
+  then
+
+
+    echo -e
+    bash modules/opt26
+
+
+fi
+
+if [ "$options" = "27" ]
+
+  then
+
+
+    echo -e
+    bash modules/opt27
+
+
+fi
+
+if [ "$options" = "28" ]
+
+  then
+
+
+    echo -e
+    bash modules/opt28
+
+
+fi
+
+if [ "$options" = "29" ]
+
+  then
+
+
+    echo -e
+    bash modules/opt29
+
+
+fi
+
+if [ "$options" = "30" ]
+
+  then
+
+
+    echo -e
+    bash modules/opt30
+
+
+fi
+
+if [[ ($options = "A" || $options = "a") ]];
+  then
+
+
+    echo -e
+    bash modules/about
+
+
+fi
+
+if [[ ($options = "E" || $options = "e") ]];
+
+ then
+
+
+  clear && echo -e "Exiting the ADB-Toolkit, Thanks for using."
+  adb kill-server >/dev/null 2>&1 | echo -e "\nKilling previous running ADB Server."
+  echo -e "\nDONE"
+  exit
+
+
+fi
+
+#clear && bash modules/funtion.sh
 
 
 #bug fix
