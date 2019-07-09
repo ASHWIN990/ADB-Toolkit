@@ -33,8 +33,8 @@ else
     echo -e "\nERROR INSTALLING FASTBOOT, INSTALL IT MANUALLY"
 fi
 
- #adb kill-server >/dev/null 2>&1 | echo -e "\n\nKilling previous running ADB Server."
- #adb start-server >/dev/null 2>&1 | echo -e "\n\nStarting New ADB Server."
+ adb kill-server >/dev/null 2>&1 | echo -e "\n\nKilling previous running ADB Server."
+ adb start-server >/dev/null 2>&1 | echo -e "\n\nStarting New ADB Server."
 
 
 clear
