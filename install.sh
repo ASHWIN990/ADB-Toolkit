@@ -13,6 +13,6 @@ clear
 echo
 echo -e "\e[1;92mINSTALLATION COMPLETED"
 echo
-echo -e "\e[1;92mUSAGE = \e[1;91m./ADB-Toolkit.sh\e[0m"
+echo -e "\e[1;92mUSAGE = \e[1;91m'sudo ./ADB-Toolkit.sh' or you can do 'sudo adb-tookit' from anywhere in shell\e[0m"
 echo
 echo
