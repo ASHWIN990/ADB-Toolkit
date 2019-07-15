@@ -8,7 +8,7 @@ sudo apt-get update
 sudo apt-get install adb -y
 sudo apt-get install fastboot -y
 chmod +x ADB-Toolkit.sh
-echo "alias adb-tookite='.$PWD/ADB-Toolkit.sh'" >> ~/.bash_aliases
+echo "alias adb-toolkit='cd $PWD && bash ADB-Toolkit.sh'" >> ~/.bash_aliases
 clear
 echo
 echo -e "\e[1;92mINSTALLATION COMPLETED"
