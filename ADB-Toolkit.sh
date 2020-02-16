@@ -1,12 +1,12 @@
 #!/bin/bash
-#Tool = ADB-Toolkit V2
+#Tool = ADB-Toolkit V2.1
 #Author = ASHWINI SAHU
-#Date = 07/07/2019
+#Date = 07/02/2020
 #Written in Bash
 #"ONLY FOR EDUCATIONAL PURPOSE"
 
 
-echo "ADB-Toolkit"
+echo -e "ADB-Toolkit by ASHWINI SAHU"
 echo
 echo
 
@@ -28,14 +28,19 @@ fi
 echo
 
 if apt-get -qq install $dep2; then
-    echo "FASTBOOT IS INSTALLED"
+    echo -e "FASTBOOT IS INSTALLED\n"
 else
     echo -e "\nERROR INSTALLING FASTBOOT, INSTALL IT MANUALLY"
 fi
 
- adb kill-server >/dev/null 2>&1 | echo -e "\n\nKilling previous running ADB Server."
- adb start-server >/dev/null 2>&1 | echo -e "\n\nStarting New ADB Server."
-
+while true; do
+  read -p $'\e[93;1mDo you want to kill and restart the Server. \e[1;97m (Y/N) \e[93;1m? : \e[1;91m' yn
+  case $yn in
+  [Yy]* ) adb kill-server >/dev/null 2>&1 | echo -e "\n\nKilling previous running ADB Server." ;adb start-server >/dev/null 2>&1 | echo -e "\n\nStarting New ADB Server." ;break;;
+  [Nn]* )  echo -e "NOT RESTARTING THE SERVER" ;break;;
+  * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
+  esac
+  done
 
 clear
 
