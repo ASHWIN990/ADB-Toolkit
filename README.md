@@ -1,7 +1,7 @@
 ![](https://img.shields.io/maintenance/YES/2019.svg?style=flat)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-# ADB-Toolkit V2 ( Version 2 )
+# ADB-Toolkit V2.1 ( Version 2.1 )
 
 **ADB-Toolkit is a BASH Script with 28 options and an METASPLOIT Section which has 6 options which is made to do easy penetration testing in Android Device.**
 You can do preety much any thing with this script and test your android device is it safe or not. This script is made with the help of ADB (Android Debug Bridge) it's an tool which is used for the developers for debugging the android device but as we know every thing has it's two side a good and a bad and i'm not telling you to do bad things but be don't do illegal things or FBI will find you 😂😂.
@@ -9,9 +9,11 @@ You can do preety much any thing with this script and test your android device i
 **METASPLOIT SECTION :- 😎**This section consists of scripts which are related to metasploit payload and you can create an payload and install it and launch it without even touching the phone and you know the power of Metasploit.
 
 ## Version 2 Changelog
-Changelog V2
+Changelog V2.1
 ```
 Added Metasploit Section
+
+Added option to restart the ADB server or not in the beginning of the script
 
 Added 7 more options :-
 1. COPY ALL DEVICE STORAGE
