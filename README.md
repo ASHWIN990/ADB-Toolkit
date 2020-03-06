@@ -1,4 +1,4 @@
-![](https://img.shields.io/maintenance/YES/2019.svg?style=flat)
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 # ADB-Toolkit V2.1 ( Version 2.1 )
