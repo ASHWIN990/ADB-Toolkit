@@ -8,7 +8,7 @@ You can do preety much any thing with this script and test your android device i
 
 **METASPLOIT SECTION :- 😎**This section consists of scripts which are related to metasploit payload and you can create an payload and install it and launch it without even touching the phone and you know the power of Metasploit.
 
-## Version 2 Changelog
+## Version 2.1 Changelog
 Changelog V2.1
 ```
 Added Metasploit Section
