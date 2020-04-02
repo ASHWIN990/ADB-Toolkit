@@ -1,16 +1,167 @@
 #!/bin/bash
-echo -e "\e[1;93mHere are list of the IP i find in your device select the right ine and write below : \e[0m"
-adb shell ip route | awk '{print $9}'
-read -p $'\e[1;93m\n\nEnter the IP from above or any open ADB port IP : \e[0m' dev_ip
-adb tcpip 5555
-adb_ip=$(adb connect $dev_ip)
-echo -e "\e[1;92m$adb_ip"
-while true; do
-  read -p $'\e[93;1mDo you want to launch the shell\e[1;97m (Y/N) \e[93;1m? : \e[1;91m' yn
-  case $yn in
-  [Yy]* ) echo ;echo -e "\e[1;0m";adb shell;;
-  [Nn]* )  echo && bash modules/funtion.sh ;exit;;
-  * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
-  esac
-  done
-bash modules/funtion.sh
+
+adb devices | sed -n '2,$p' | awk '{ print $1 }' > .temp/dev_list_temp 2> /dev/null
+dev=(`cat .temp/dev_list_temp`)
+dev=("${dev[@]}")
+dev_1=$(echo "${dev[0]}")
+dev_2=$(echo "${dev[1]}")
+dev_3=$(echo "${dev[2]}")
+
+## DEVICE MODEL EXTARCT ##
+
+adb devices -l | grep model > .temp/dev_list_model_temp 2> /dev/null
+model=(`cat .temp/dev_list_model_temp`)
+model=("${model[@]}")
+mod_1=$(echo "${model[4]}" | cut -c 7- )
+mod_2=$(echo "${model[11]}" | cut -c 7- )
+mod_3=$(echo "${model[18]}" | cut -c 7- )
+
+
+if [ "$dev_1" == "" ]
+    then
+        total_dev=0
+    else
+        total_dev=1
+        if [ "$dev_2" == "" ]
+            then
+                total_dev=1
+            else
+                total_dev=2
+                if [ "$dev_3" == "" ]
+                    then
+                        total_dev=2
+                    else
+                        total_dev=3
+                fi
+        fi        
+fi
+
+ip_finder () {
+
+              dev_ip=$(adb -s $devvv shell ip addr show wlan0 | grep "inet\s" | awk '{print $2}' | awk -F'/' '{print $1}')
+              echo -e "\e[1;93mThe IP address is \e[1;91m$dev_ip\n" 
+
+}
+
+remote_shell () {
+
+        if [ "$con_success" == "0" ]
+            then
+                  while true; do
+                    read -p $'\n\e[93;1mDo you want to launch the shell\e[1;97m (Y/N) \e[93;1m? : \e[1;91m' yn
+                    case $yn in
+                        [Yy]* ) echo ;echo -e "\e[1;0m";adb -s $devvv shell; break;;
+                        [Nn]* )  break;;
+                            * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
+                    esac
+                  done
+        fi
+}
+
+dev_1_remo () {
+
+              devvv=$(echo "$dev_1")
+              echo -e "\n\e[1;93mMake sure that the device \e[1;91m$mod_1 \e[1;93mis connected to the same network in which ADB-Tookit is installed.\n"
+              ip_finder
+              adb -s $dev_1 tcpip 5555 > /dev/null 2>&1
+              connect_msg=$(adb -s $dev_1 connect $dev_ip) > /dev/null 2>&1
+              SUB='connected'
+              if [[ "$connect_msg" == *"$SUB"* ]]; then
+                    con_success=0
+                    echo -e "\e[1;93mRemote connection established to device \e[1;91m$mod_1\e[1;93m with IP \e[1;91m$dev_ip"
+                  else
+                    con_success=1
+                    echo -e "\e[1;93mRemote connection failed to device \e[1;91m$mod_1\e[1;93m with IP \e[1;91m$dev_ip"
+              fi
+              remote_shell
+}
+
+dev_2_remo () {
+
+              devvv=$(echo "$dev_2")
+              echo -e "\n\e[1;93mMake sure that the device \e[1;91m$mod_2 \e[1;93mis connected to the same network in which ADB-Tookit is installed.\n"
+              ip_finder
+              adb -s $dev_2 tcpip 5555 > /dev/null 2>&1
+              connect_msg=$(adb -s $dev_2 connect $dev_ip) > /dev/null 2>&1
+              SUB='connected'
+              if [[ "$connect_msg" == *"$SUB"* ]]; then
+                    con_success=0
+                    echo -e "\e[1;93mRemote connection established to device \e[1;91m$mod_2\e[1;93m with IP \e[1;91m$dev_ip"
+                  else
+                    con_success=1
+                    echo -e "\e[1;93mRemote connection failed to device \e[1;91m$mod_2\e[1;93m with IP \e[1;91m$dev_ip"
+              fi
+              remote_shell
+
+}
+
+dev_3_remo () {
+
+              devvv=$(echo "$dev_3")
+              echo -e "\n\e[1;93mMake sure that the device \e[1;91m$mod_3 \e[1;93mis connected to the same network in which ADB-Tookit is installed.\n"
+              ip_finder
+              adb -s $dev_3 tcpip 5555 > /dev/null 2>&1
+              connect_msg=$(adb -s $dev_3 connect $dev_ip) > /dev/null 2>&1
+              SUB='connected'
+              if [[ "$connect_msg" == *"$SUB"* ]]; then
+                    con_success=0
+                    echo -e "\e[1;93mRemote connection established to device \e[1;91m$mod_3\e[1;93m with IP \e[1;91m$dev_ip"
+                  else
+                    con_success=1
+                    echo -e "\e[1;93mRemote connection failed to device \e[1;91m$mod_3\e[1;93m with IP \e[1;91m$dev_ip"
+              fi
+              remote_shell
+
+}
+
+if [ "$total_dev" ==  "0" ]
+    then
+        echo -e "\e[91;1mNO DEVICE CONNECTED"
+    else
+        if [ "$total_dev" == "1" ]
+            then
+                echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                dev_1_remo
+
+            else
+                if [ "$total_dev" == "2" ]
+                    then
+                        echo -e "\e[93mSelect the device to connect remotely :- \e[92m\n"
+                        echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                        echo -e "\e[93m2. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                        while [ 1 ]; do
+                            read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                            case $options in
+                            "1") dev_1_remo; break;;
+                            "2") dev_2_remo; break;;
+                              *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2)\n";;
+                            esac
+                        done
+                    else
+                        if [ "$total_dev" == "3" ]
+                            then
+                                echo -e "\e[93mSelect the device to connect remotely :- \e[92m\n"
+                                echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                                echo -e "\e[93m1. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                                echo -e "\e[93m1. \e[92m$dev_3 , \e[93mModel : \e[92m$mod_3"
+                        while [ 1 ]; do
+                            read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                            case $options in
+                            "1") dev_1_remo; break;;
+                            "2") dev_2_remo; break;;
+                            "3") dev_3_remo; break;;
+                              *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2/3/)\n";;
+                            esac
+                        done
+                        fi
+                fi  
+                        
+        fi
+fi
+
+read -p $'\n\e[93;1mDo you want to clear the screen \e[1;97m (y/N) \e[93;1m? : \e[1;91m' yn
+case $yn in
+  [Yy]* ) clear; bash modules/funtion.sh;;
+  [Nn]* ) bash modules/funtion.sh;;
+  * ) bash modules/funtion.sh;;
+esac
