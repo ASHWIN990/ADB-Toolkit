@@ -1,5 +1,73 @@
 #!/bin/bash
 
-sudo adb devices
+## DEVICE ID EXTARCT ##
 
-bash modules/funtion2.sh
+adb devices | sed -n '2,$p' | awk '{ print $1 }' > .temp/dev_list_temp 2> /dev/null
+dev=(`cat .temp/dev_list_temp`)
+dev=("${dev[@]}")
+dev_1=$(echo "${dev[0]}")
+dev_2=$(echo "${dev[1]}")
+dev_3=$(echo "${dev[2]}")
+
+## DEVICE MODEL EXTARCT ##
+
+adb devices -l | grep model > .temp/dev_list_model_temp 2> /dev/null
+model=(`cat .temp/dev_list_model_temp`)
+model=("${model[@]}")
+mod_1=$(echo "${model[4]}" | cut -c 7- )
+mod_2=$(echo "${model[11]}" | cut -c 7- )
+mod_3=$(echo "${model[18]}" | cut -c 7- )
+
+
+if [ "$dev_1" == "" ]
+    then
+        total_dev=0
+    else
+        total_dev=1
+        if [ "$dev_2" == "" ]
+            then
+                total_dev=1
+            else
+                total_dev=2
+                if [ "$dev_3" == "" ]
+                    then
+                        total_dev=2
+                    else
+                        total_dev=3
+                fi
+        fi        
+fi
+
+
+echo -e "\e[93mThe available devices are :- \e[92m\n"
+if [ "$total_dev" ==  "0" ]
+    then
+        echo -e "\e[91;1mNO DEVICE CONNECTED"
+    else
+        if [ "$total_dev" == "1" ]
+            then
+                echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+            else
+                if [ "$total_dev" == "2" ]
+                    then
+                        echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                        echo -e "\e[93m2. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                    else
+                        if [ "$total_dev" == "3" ]
+                            then
+                                echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                                echo -e "\e[93m1. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                                echo -e "\e[93m1. \e[92m$dev_3 , \e[93mModel : \e[92m$mod_3"
+                        fi
+                fi  
+                        
+        fi
+fi
+echo -e "\n\e[93mThe total devices are :- \e[91m$total_dev\n"
+
+read -p $'\n\e[93;1mDo you want to clear the screen \e[1;97m (y/N) \e[93;1m? : \e[1;91m' yn
+case $yn in
+  [Yy]* ) clear; bash modules/function2.sh;;
+  [Nn]* ) bash modules/function2.sh;;
+  * ) bash modules/function2.sh;;
+esac
