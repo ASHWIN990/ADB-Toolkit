@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if ! which msfvenom > /dev/null; then
+   echo -e "'\e[1;93mMetasploit Framework\e[0m' not found please install it first then run the script"
+   exit
+fi
+
 adb devices | sed -n '2,$p' | awk '{ print $1 }' > .temp/dev_list_temp 2> /dev/null
 dev=(`cat .temp/dev_list_temp`)
 dev=("${dev[@]}")
