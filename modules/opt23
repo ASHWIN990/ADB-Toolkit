@@ -1,4 +1,242 @@
 #!/bin/bash
-read -p $'\e[1;93mEnter the path of file or folder which you want to copy : \e[0m' file_to_copy_path
-adb pull $file_to_copy_path
-bash modules/funtion.sh
+
+if [ -d $PWD/device-pull/ ]
+    then
+        echo -e "\e[92mDirectory $PWD/device-pull/ exists. \n"
+    else
+        mkdir $PWD/device-pull > /dev/null 2&>1
+fi
+
+adb devices | sed -n '2,$p' | awk '{ print $1 }' > .temp/dev_list_temp  2> /dev/null
+dev=(`cat .temp/dev_list_temp`)
+dev=("${dev[@]}")
+dev_1=$(echo "${dev[0]}")
+dev_2=$(echo "${dev[1]}")
+dev_3=$(echo "${dev[2]}")
+
+## DEVICE MODEL EXTARCT ##
+
+adb devices -l | grep model > .temp/dev_list_model_temp  2> /dev/null
+model=(`cat .temp/dev_list_model_temp`)
+model=("${model[@]}")
+mod_1=$(echo "${model[4]}" | cut -c 7- )
+mod_2=$(echo "${model[11]}" | cut -c 7- )
+mod_3=$(echo "${model[18]}" | cut -c 7- )
+
+if [ "$dev_1" == "" ]
+    then
+        total_dev=0
+    else
+        total_dev=1
+        if [ "$dev_2" == "" ]
+            then
+                total_dev=1
+            else
+                total_dev=2
+                if [ "$dev_3" == "" ]
+                    then
+                        total_dev=2
+                    else
+                        total_dev=3
+                fi
+        fi        
+fi
+
+if_file_exist_in_dev (){
+
+    echo -e "\n\e[1;93mDon't include \e[1;92m/sdcard/\e[1;93m , Example :- \e[1;92mDownload/ashwini.pdf]\n"
+    while [ 1 ]
+        do    
+            read -p $'\e[1;93mEnter the path of file which you want to pull : \e[0m' file_to_copy_path
+            if [ "$file_to_copy_path" == "" ]
+                then
+                    echo -e "\e[91mPlease enter the path name plz....\n"
+                    if_file_exist_in_dev
+                else
+                    tmp_chk=$(echo "if [ -f /sdcard/$file_to_copy_path ]; then echo '0'; else echo '1'; fi" | adb -s $devvv shell)
+                    if [ "$tmp_chk" == "0" ]
+                        then
+                            echo
+                            file_to_copy=0
+                            break
+                        else
+                            echo -e "\e[91mPlease enter the right path name plz....\n"
+                            if_file_exist_in_dev
+                    fi
+            fi
+
+    done
+
+}
+
+if_dir_exist_in_dev (){
+
+    echo -e "\n\e[1;93mDon't include \e[1;92m/sdcard/\e[1;93m , Example :- \e[1;92mDownload/]\n"
+    while [ 1 ]
+        do    
+            read -p $'\e[1;93mEnter the path of directory which you want to pull : \e[0m' dir_to_copy_path
+            if [ "$dir_to_copy_path" == "" ]
+                then
+                    echo -e "\e[91mPlease enter the path name plz....\n"
+                    if_dir_exist_in_dev
+                else
+                    tmp_chk=$(echo "if [ -d /sdcard/$dir_to_copy_path ]; then echo '0'; else echo '1'; fi" | adb -s $devvv shell)
+                    if [ "$tmp_chk" == "0" ]
+                        then
+                            echo
+                            break
+                        else
+                            echo -e "\e[91mPlease enter the right path name plz....\n"
+                            if_dir_exist_in_dev
+                    fi
+            fi
+
+    done
+
+}
+
+dev_1_custom_pull () {
+                
+                devvv=$(echo $dev_1)
+                echo -e "\e[93m1. \e[92mCopy File"
+                echo -e "\e[93m2. \e[92mCopy Directory"                
+                while [ 1 ]
+                    do
+                         read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                         case $options in
+                         "1") if_file_exist_in_dev; break;;
+                         "2") if_dir_exist_in_dev; break;;
+                         *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2)\n";;
+                         esac    
+                done
+                    if [ -d $PWD/device-pull/"$mod_1"-"$dev_1"/ ]
+                        then
+                            echo -e "\e[92mDirectory exists. \n\e[93m" 
+                        else
+                            tmp_dir=$(echo $PWD/device-pull/$mod_1-$dev_1)
+                            mkdir -p $tmp_dir
+                    fi
+
+                if [ "$file_to_copy" == "0" ]
+                    then
+                        adb -s $dev_1 pull /sdcard/$file_to_copy_path $PWD/device-pull/$mod_1-$dev_1/
+                    else
+                        adb -s $dev_1 pull /sdcard/$dir_to_copy_path/ $PWD/device-pull/$mod_1-$dev_1/
+                fi
+                echo -e "\n\e[1;92mProcess complete.\n"
+
+}
+
+dev_2_custom_pull () {
+                
+                devvv=$(echo $dev_2)
+                echo -e "\e[93m1. \e[92mCopy File"
+                echo -e "\e[93m2. \e[92mCopy Directory"                
+                while [ 1 ]
+                    do
+                         read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                         case $options in
+                         "1") if_file_exist_in_dev; break;;
+                         "2") if_dir_exist_in_dev; break;;
+                         *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2)\n";;
+                         esac
+                done
+                    if [ -d $PWD/device-pull/"$mod_2"-"$dev_2"/ ]
+                        then
+                            echo -e "\e[92mDirectory exists. \n\e[93m" 
+                        else
+                            tmp_dir=$(echo $PWD/device-pull/$mod_2-$dev_2)
+                            mkdir -p $tmp_dir
+                    fi
+
+                if [ "$file_to_copy" == "0" ]
+                    then
+                        adb -s $dev_2 pull /sdcard/$file_to_copy_path $PWD/device-pull/$mod_2-$dev_2/Custom-$time/
+                    else
+                        adb -s $dev_2 pull /sdcard/$dir_to_copy_path/ $PWD/device-pull/$mod_2-$dev_2/custom-$time/
+                fi
+                echo -e "\n\e[1;92mProcess complete.\n"
+
+}
+
+dev_3_custom_pull () {
+
+                devvv=$(echo $dev_3)                
+                echo -e "\e[93m1. \e[92mCopy File"
+                echo -e "\e[93m2. \e[92mCopy Directory"                
+                while [ 1 ]
+                    do
+                         read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                         case $options in
+                         "1") if_file_exist_in_dev; break;;
+                         "2") if_dir_exist_in_dev; break;;
+                         *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2)\n";;
+                         esac
+                done
+                    if [ -d $PWD/device-pull/"$mod_3"-"$dev_3"/ ]
+                        then
+                            echo -e "\e[92mDirectory exists. \n\e[93m" 
+                        else
+                            tmp_dir=$(echo $PWD/device-pull/$mod_3-$dev_3)
+                            mkdir -p $tmp_dir
+                    fi
+
+                if [ "$file_to_copy" == "0" ]
+                    then
+                        adb -s $dev_3 pull /sdcard/$file_to_copy_path $PWD/device-pull/$mod_3-$dev_3/Custom-$time/
+                    else
+                        adb -s $dev_3 pull /sdcard/$dir_to_copy_path/ $PWD/device-pull/$mod_3-$dev_3/custom-$time/
+                fi
+                echo -e "\n\e[1;92mProcess complete.\n"
+
+}
+
+if [ "$total_dev" ==  "0" ]
+    then
+        echo -e "\e[91;1mNO DEVICE CONNECTED"
+    else
+        if [ "$total_dev" == "1" ]
+            then
+                dev_1_custom_pull
+            else
+                if [ "$total_dev" == "2" ]
+                    then
+                        echo -e "\e[93mSelect the device to copy data :- \e[92m\n"
+                        echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                        echo -e "\e[93m2. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                        while [ 1 ]; do
+                            read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                            case $options in
+                            "1") dev_1_custom_pull; break;;
+                            "2") dev_2_custom_pull; break;;
+                              *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2)\n";;
+                            esac
+                        done
+                    else
+                        if [ "$total_dev" == "3" ]
+                            then
+                                echo -e "\e[93mSelect the device to copy data:- \e[92m\n"
+                                echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                                echo -e "\e[93m1. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                                echo -e "\e[93m1. \e[92m$dev_3 , \e[93mModel : \e[92m$mod_3"
+                        while [ 1 ]; do
+                            read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                            case $options in
+                            "1") dev_1_custom_pull; break;;
+                            "2") dev_2_custom_pull; break;;
+                            "3") dev_3_custom_pull; break;;
+                              *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2/3/)\n";;
+                            esac
+                        done
+                        fi
+                fi  
+                        
+        fi
+fi
+
+read -p $'\n\e[93;1mDo you want to clear the screen \e[1;97m (y/N) \e[93;1m? : \e[1;91m' yn
+case $yn in
+  [Yy]* ) clear; bash modules/funtion.sh;;
+  [Nn]* ) bash modules/funtion.sh;;
+  * ) bash modules/funtion.sh;;
+esac
