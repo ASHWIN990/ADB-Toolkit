@@ -1,47 +1,28 @@
 #!/bin/bash
 
-
 set -euo pipefail
 IFS=$'\n\t'
 
-function usage(){
-echo "test"
-}
-
-function checkIfFileExists(){
-    if [ -f ${FILENAME} ]; then
-        echo "\e[1;91m[ERROR] \e[1;93mThe recording you are trying to create already exists!"
-        read -r -p $'\e[1;93mDo you want to overwrite this file? [y/N] ' RESPONSE
-        RESPONSE=`echo ${RESPONSE}| awk '{print tolower($0)}'`
-        if [[ (${RESPONSE} == "" || ${RESPONSE} == "n" || ${RESPONSE} == "no") ]];then
-            exit 1
-        fi
-    fi
-}
-
 function takeScreenshot(){
-	echo -e "\e[1;93mTaking screenshot '${FILENAME}'..."
-    adb shell screencap -p /sdcard/${FILENAME}
-
-	echo -e "\e[1;93mProcess complete."
+    echo -e "\e[1;93mTaking screenshot '${FILENAME}'...\n\e[91m"
+    adb -s $devv shell screencap -p /sdcard/${FILENAME}
+	echo -e "\e[1;92mProcess complete.\n"
 }
 
 function pullScreenshot(){
-    echo -e "\e[1;93mDownloading screenshot '${FILENAME}'..."
-    adb pull /sdcard/${FILENAME} screenshot/${FILENAME}
-
-    echo -e "\e[1;93mProcess complete."
+    echo -e "\e[1;93mPulling screenshot '${FILENAME}' from device...\n\e[91m"    
+    adb -s $devv  pull /sdcard/${FILENAME} screenshot/${FILENAME}
+    echo -e "\n\e[1;92mProcess complete.\n"
 }
 
 function deleteScreenshotFromDevice(){
-    echo -e "\e[1;93mDeleting screenshot '${FILENAME}'..."
-    adb shell rm /sdcard/${FILENAME}
-
-    echo -e "\e[1;93mProcess complete."
+    echo -e "\e[1;93mDeleting screenshot '${FILENAME}' from device...\n\e[91m"
+    adb -s $devv shell rm /sdcard/${FILENAME}
+    echo -e "\e[1;92mProcess complete."
     exit 0
 }
 
-[[ $# -eq 1 ]] || { usage; }
+[[ $# -eq 1 ]] || { echo; }
 
 for _ARGUMENT in "$@"
 do
@@ -59,7 +40,6 @@ do
     esac
 done
 
-checkIfFileExists
 takeScreenshot
 pullScreenshot
-deleteScreenshotFromDevice
+deleteScreenshotFromDevice 
