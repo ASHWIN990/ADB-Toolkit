@@ -6,31 +6,41 @@
 #"ONLY FOR EDUCATIONAL PURPOSE"
 
 
-echo -e "ADB-Toolkit by ASHWINI SAHU"
-echo
-echo
+echo -e "ADB-Toolkit by ASHWINI SAHU\n\n"
 
 if [ $(id -u) -ne 0 ]; then
         echo "THIS SCRIPT MUST BE RAN AS ROOT"
-        exit
+        exit 1
+fi
+
+if [ -d $PWD/.temp/ ]
+    then
+        echo -e "YOU HAVE THE .temp DIRECTORY" && clear
+    else
+        echo -e "PLEASE INSTALL THE TOOL IF NOT INSTALLED OR IF INSTALLED MAKE A '.temp' DIRECTORY FIRST" && exit
 fi
 
 
-dep1="adb"
-dep2="fastboot"
 
-if apt-get -qq install $dep1; then
-    echo "ADB IS INSTALLED"
+adb_check=$(which adb) 
+
+if [ "$?" == 0 ]; then
+    echo -e "ADB IS INSTALLED\n"
+    echo -e "INITALIZING ADB\n"
 else
-    echo -e "\nERROR INSTALLING ADB, INSTALL IT MANUALLY"
+    echo -e "\nADB IS NOT INSTALLED, RUN THE INSTALLATION SCRIPT OR TRY INSTALLING 'ADB' MANUALLY"
+    exit 1
 fi
 
-echo
 
-if apt-get -qq install $dep2; then
+adb_check=$(which fastboot)
+
+if [ "$?" == 0 ]; then
     echo -e "FASTBOOT IS INSTALLED\n"
+    echo -e "INITALIZING FASTBOOT\n"
 else
-    echo -e "\nERROR INSTALLING FASTBOOT, INSTALL IT MANUALLY"
+    echo -e "\nFASTBOOT IS NOT INSTALLED, RUN THE INSTALLATION SCRIPT OR TRY INSTALLING 'FASTBOOT' MANUALLY"
+    exit 1
 fi
 
 while true; do
@@ -58,6 +68,6 @@ echo -e "\e[1;93m
 
 \e[0m"
 echo
-echo -e "\e[93mMade with LOVE by \e[1;91mASHWINI SAHU\e[0m"
+echo -e "\e[93mMade with ❤️ by \e[1;91mASHWINI SAHU\e[0m"
 }
 bash modules/funtion.sh
