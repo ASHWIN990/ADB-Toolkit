@@ -38,8 +38,7 @@ option2_list () {
         echo -e "\e[1;93m2.   \e[1;92mCREATE AND INSTALL METAPLOIT PAYLOAD \e[1;93m( .apk )"
         echo -e "\e[1;93m3.   \e[1;92mLAUNCH THE METASPLOIT PACKAGE \e[1;93m( .apk )"
         echo -e "\n\e[1;93m4.   \e[1;91mLAUNCH THE METASPLOIT LISTNER \e[1;93m( .apk )"
-        echo -e "\e[1;93m5.   \e[1;91mLAUNCH THE METASPLOIT LISTNER \e[1;93m( .pdf )"
-        echo -e "\n\e[1;93m6.   \e[1;92mGO BACK TO ADB-Toolkit"
+        echo -e "\n\e[1;93m5.   \e[1;92mGO BACK TO ADB-Toolkit"
         echo -e "\e[1;93mE.   \e[1;92mEXIT or press Ctrl+c\n"
         echo $revised
         read -p $'\n\e[1;4;91mSELECT ONE OF THE OPTIONS WITH THE RESPECTED NUMBER\e[0m\e[24;1;97m : ' options2
@@ -63,8 +62,7 @@ do
         "2") echo -e; bash modules/2opt2;;
         "3") echo -e; bash modules/2opt3;;
         "4") echo -e; bash modules/2opt4;;
-        "5") echo -e; bash modules/2opt5;;
-        "6") echo -e; bash modules/funtion.sh;;
+        "5") echo -e; bash modules/funtion.sh;;
         "E") clean_exit;;
         "e") clean_exit;;
 
