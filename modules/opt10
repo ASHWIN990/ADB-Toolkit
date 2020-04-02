@@ -1,30 +1,193 @@
 #!/bin/bash
 
-echo -e ""
-echo -e ""
-model=$(adb shell getprop ro.product.model)
-brand=$(adb shell getprop ro.product.vendor.brand)
-chipset=$(adb shell getprop ro.product.board)
-android=$(adb shell getprop ro.vendor.build.version.release)
-device=$(adb shell getprop ro.product.vendor.device)
-sim=$(adb shell getprop gsm.sim.operator.alpha)
+adb devices | sed -n '2,$p' | awk '{ print $1 }' > .temp/dev_list_temp 2> /dev/null
+dev=(`cat .temp/dev_list_temp`)
+dev=("${dev[@]}")
+dev_1=$(echo "${dev[0]}")
+dev_2=$(echo "${dev[1]}")
+dev_3=$(echo "${dev[2]}")
 
-echo -e "\e[1;92mModel \e[1;94m= \e[1;93m$model"
-echo -e "\e[1;92mBrand \e[1;94m= \e[1;93m$brand"
-echo -e "\e[1;92mDevice \e[1;94m= \e[1;93m$device"
-echo -e "\e[1;92mAndroid \e[1;94m= \e[1;93m$android"
-echo -e "\e[1;92mSim Card \e[1;94m= \e[1;93m$sim"
-echo -e "\e[1;92mChipset \e[1;94m= \e[1;93m$chipset"
-echo
-echo
+## DEVICE MODEL EXTARCT ##
 
-while true; do
-  read -p $'\e[93;1mDo you want to see all the Details\e[1;97m (Y/N) \e[93;1m? : \e[1;91m' yn
-  case $yn in
-  [Yy]* ) echo ;echo -e "\e[1;93m";adb shell getprop && bash modules/funtion.sh;;
-  [Nn]* )  echo && bash modules/funtion.sh ;exit;;
-  * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
-  esac
-  done
+adb devices -l | grep model > .temp/dev_list_model_temp 2> /dev/null
+model=(`cat .temp/dev_list_model_temp`)
+model=("${model[@]}")
+mod_1=$(echo "${model[4]}" | cut -c 7- )
+mod_2=$(echo "${model[11]}" | cut -c 7- )
+mod_3=$(echo "${model[18]}" | cut -c 7- )
 
-echo
+
+if [ "$dev_1" == "" ]
+    then
+        total_dev=0
+    else
+        total_dev=1
+        if [ "$dev_2" == "" ]
+            then
+                total_dev=1
+            else
+                total_dev=2
+                if [ "$dev_3" == "" ]
+                    then
+                        total_dev=2
+                    else
+                        total_dev=3
+                fi
+        fi        
+fi
+
+print_info () {
+
+        echo -e "\n\e[1;93mThe Details of the device \e[1;92m$MOD \e[93mare :- "  
+        echo -e "\n\e[1;92mModel \e[1;94m= \e[1;93m$model"
+        echo -e "\e[1;92mDevice \e[1;94m= \e[1;93m$device"
+        echo -e "\e[1;92mBrand \e[1;94m= \e[1;93m$brand"
+        echo -e "\e[1;92mBuild Date \e[1;94m= \e[1;93m$build_date"
+        echo -e "\e[1;92mAndroid \e[1;94m= \e[1;93m$android"
+        echo -e "\e[1;92mSDK Version \e[1;94m= \e[1;93m$sdk_version"
+        echo -e "\e[1;92mSim Card \e[1;94m= \e[1;93m$sim"
+        echo -e "\e[1;92mChipset \e[1;94m= \e[1;93m$chipset"
+        echo -e "\e[1;92mSecurity Patch  \e[1;94m= \e[1;93m$security_patch"
+        echo -e "\e[1;92mEncryption State \e[1;94m= \e[1;93m$encryption_state"
+        echo -e "\e[1;92mWiFi Interface \e[1;94m= \e[1;93m$wifi_interface\n"
+
+}
+
+dev_1_info () {
+
+          model=$(adb -s $dev_1 shell getprop ro.product.model)
+          brand=$(adb -s $dev_1 shell getprop ro.product.vendor.brand)
+          chipset=$(adb -s $dev_1 shell getprop ro.product.board)
+          android=$(adb -s $dev_1 shell getprop ro.build.version.release)
+          security_patch=$(adb -s $dev_1 shell getprop ro.build.version.security_patch)
+          device=$(adb -s $dev_1 shell getprop ro.product.vendor.device)
+          sim=$(adb -s $dev_1 shell getprop gsm.sim.operator.alpha)
+          encryption_state=$(adb -s $dev_1 shell getprop ro.crypto.state)
+          build_date=$(adb -s $dev_1 shell getprop ro.build.date)
+          sdk_version=$(adb -s $dev_1 shell getprop ro.build.version.sdk)
+          wifi_interface=$(adb -s $dev_1 shell getprop wifi.interface)
+          MOD=$(echo $mod_1)
+
+          print_info
+
+          while true; do
+            time=$(date +"%T")
+            read -p $'\e[93;1mDo you want to see all the Details\e[1;97m (Y/N) \e[93;1m? : \e[1;91m' yn
+            case $yn in
+            [Yy]* ) echo ;echo -e "\e[1;93m"; adb -s $dev_1 shell getprop > sys-dump-info/$mod_1-details-$time.log  ; sleep 1s | echo -e "THE DEVICE IS INITIALIZING WAIT"; cat sys-dump-info/$mod_1-details-$time.log | less; break ;;
+            [Nn]* ) break;;
+            * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
+            esac
+          done
+
+}
+
+dev_2_info () {
+
+          model=$(adb -s $dev_2 shell getprop ro.product.model)
+          brand=$(adb -s $dev_2 shell getprop ro.product.vendor.brand)
+          chipset=$(adb -s $dev_2 shell getprop ro.product.board)
+          android=$(adb -s $dev_2 shell getprop ro.build.version.release)
+          security_patch=$(adb -s $dev_2 shell getprop ro.build.version.security_patch)
+          device=$(adb -s $dev_2 shell getprop ro.product.vendor.device)
+          sim=$(adb -s $dev_2 shell getprop gsm.sim.operator.alpha)
+          encryption_state=$(adb -s $dev_2 shell getprop ro.crypto.state)
+          build_date=$(adb -s $dev_2 shell getprop ro.build.date)
+          sdk_version=$(adb -s $dev_2 shell getprop ro.build.version.sdk)
+          wifi_interface=$(adb -s $dev_2 shell getprop wifi.interface)
+          MOD=$(echo $mod_2)
+
+          print_info
+
+          while true; do
+            time=$(date +"%T")
+            read -p $'\e[93;1mDo you want to see all the Details\e[1;97m (Y/N) \e[93;1m? : \e[1;91m' yn
+            case $yn in
+            [Yy]* ) echo ;echo -e "\e[1;93m"; adb -s $dev_2 shell getprop > sys-dump-info/$mod_2-details-$time.log  ; sleep 1s | echo -e "THE DEVICE IS INITIALIZING WAIT"; cat sys-dump-info/$mod_2-details-$time.log | less; break ;;
+            [Nn]* ) break;;
+            * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
+            esac
+          done
+
+}
+
+dev_3_info () {
+
+          model=$(adb -s $dev_3 shell getprop ro.product.model)
+          brand=$(adb -s $dev_3 shell getprop ro.product.vendor.brand)
+          chipset=$(adb -s $dev_3 shell getprop ro.product.board)
+          android=$(adb -s $dev_3 shell getprop ro.build.version.release)
+          security_patch=$(adb -s $dev_3 shell getprop ro.build.version.security_patch)
+          device=$(adb -s $dev_3 shell getprop ro.product.vendor.device)
+          sim=$(adb -s $dev_3 shell getprop gsm.sim.operator.alpha)
+          encryption_state=$(adb -s $dev_3 shell getprop ro.crypto.state)
+          build_date=$(adb -s $dev_3 shell getprop ro.build.date)
+          sdk_version=$(adb -s $dev_3 shell getprop ro.build.version.sdk)
+          wifi_interface=$(adb -s $dev_3 shell getprop wifi.interface)
+          MOD=$(echo $mod_3)
+
+          print_info
+
+          while true; do
+            time=$(date +"%T")
+            read -p $'\e[93;1mDo you want to see all the Details\e[1;97m (Y/N) \e[93;1m? : \e[1;91m' yn
+            case $yn in
+            [Yy]* ) echo ;echo -e "\e[1;93m"; adb -s $dev_3 shell getprop > sys-dump-info/$mod_3-details-$time.log  ; sleep 1s | echo -e "THE DEVICE IS INITIALIZING WAIT"; cat sys-dump-info/$mod_3-details-$time.log | less; break ;;
+            [Nn]* ) break;;
+            * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
+            esac
+          done
+
+}
+
+if [ "$total_dev" ==  "0" ]
+    then
+        echo -e "\e[91;1mNO DEVICE CONNECTED"
+    else
+        if [ "$total_dev" == "1" ]
+            then
+                echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                dev_1_info
+
+            else
+                if [ "$total_dev" == "2" ]
+                    then
+                        echo -e "\e[93mSelect the device to get the details :- \e[92m\n"
+                        echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                        echo -e "\e[93m2. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                        while [ 1 ]; do
+                            read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                            case $options in
+                            "1") dev_1_info; break;;
+                            "2") dev_2_info; break;;
+                              *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2)\n";;
+                            esac
+                        done
+                    else
+                        if [ "$total_dev" == "3" ]
+                            then
+                                echo -e "\e[93mSelect the device to get the details :- \e[92m\n"
+                                echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                                echo -e "\e[93m1. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                                echo -e "\e[93m1. \e[92m$dev_3 , \e[93mModel : \e[92m$mod_3"
+                        while [ 1 ]; do
+                            read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                            case $options in
+                            "1") dev_1_info; break;;
+                            "2") dev_2_info; break;;
+                            "3") dev_3_info; break;;
+                              *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2/3/)\n";;
+                            esac
+                        done
+                        fi
+                fi  
+                        
+        fi
+fi
+
+read -p $'\n\n\e[93;1mDo you want to clear the screen \e[1;97m (y/N) \e[93;1m? : \e[1;91m' yn
+case $yn in
+  [Yy]* ) clear; bash modules/funtion.sh;;
+  [Nn]* ) bash modules/funtion.sh;;
+  * ) bash modules/funtion.sh;;
+esac
