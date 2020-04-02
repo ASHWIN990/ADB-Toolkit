@@ -1,3 +1,89 @@
 #!/bin/bash
-sudo adb reboot bootloader
-bash modules/funtion.sh
+
+adb devices | sed -n '2,$p' | awk '{ print $1 }' > .temp/dev_list_temp 2> /dev/null
+dev=(`cat .temp/dev_list_temp`)
+dev=("${dev[@]}")
+dev_1=$(echo "${dev[0]}")
+dev_2=$(echo "${dev[1]}")
+dev_3=$(echo "${dev[2]}")
+
+## DEVICE MODEL EXTARCT ##
+
+adb devices -l | grep model > .temp/dev_list_model_temp 2> /dev/null
+model=(`cat .temp/dev_list_model_temp`)
+model=("${model[@]}")
+mod_1=$(echo "${model[4]}" | cut -c 7- )
+mod_2=$(echo "${model[11]}" | cut -c 7- )
+mod_3=$(echo "${model[18]}" | cut -c 7- )
+
+
+if [ "$dev_1" == "" ]
+    then
+        total_dev=0
+    else
+        total_dev=1
+        if [ "$dev_2" == "" ]
+            then
+                total_dev=1
+            else
+                total_dev=2
+                if [ "$dev_3" == "" ]
+                    then
+                        total_dev=2
+                    else
+                        total_dev=3
+                fi
+        fi        
+fi
+
+if [ "$total_dev" ==  "0" ]
+    then
+        echo -e "\e[91;1mNO DEVICE CONNECTED"
+    else
+        if [ "$total_dev" == "1" ]
+            then
+                echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                adb reboot  >/dev/null 2>&1 | echo -e "\n\e[1;92mRebooting the device  $mod_1 to Bootloader / Fastboot"
+
+            else
+                if [ "$total_dev" == "2" ]
+                    then
+                        echo -e "\e[93mSelect the device to reboot to bootloader :- \e[92m\n"
+                        echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                        echo -e "\e[93m2. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                        while [ 1 ]; do
+                            read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                            case $options in
+                            "1") adb -s $dev_1 reboot bootloader >/dev/null 2>&1 | echo -e "\n\e[1;92mRebooting the device $mod_1 to Bootloader / Fastboot"; break;;
+                            "2") adb -s $dev_2 reboot bootloader >/dev/null 2>&1 | echo -e "\n\e[1;92mRebooting the device $mod_1 to Bootloader / Fastboot"; break;;
+                              *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2)\n";;
+                            esac
+                        done
+                    else
+                        if [ "$total_dev" == "3" ]
+                            then
+                                echo -e "\e[93mSelect the device to reboot to bootloader :- \e[92m\n"
+                                echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                                echo -e "\e[93m1. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                                echo -e "\e[93m1. \e[92m$dev_3 , \e[93mModel : \e[92m$mod_3"
+                        while [ 1 ]; do
+                            read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                            case $options in
+                            "1") adb -s $dev_1 reboot bootloader >/dev/null 2>&1 | echo -e "\n\e[1;92mRebooting the device $mod_1 to Bootloader / Fastboot"; break;;
+                            "2") adb -s $dev_2 reboot bootloader >/dev/null 2>&1 | echo -e "\n\e[1;92mRebooting the device $mod_2 to Bootloader / Fastboot"; break;;
+                            "3") adb -s $dev_3 reboot bootloader >/dev/null 2>&1 | echo -e "\n\e[1;92mRebooting the device $mod_3 to Bootloader / Fastboot"; break;;
+                              *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2/3/)\n";;
+                            esac
+                        done
+                        fi
+                fi  
+                        
+        fi
+fi
+
+read -p $'\n\e[93;1mDo you want to clear the screen \e[1;97m (y/N) \e[93;1m? : \e[1;91m' yn
+case $yn in
+  [Yy]* ) clear; bash modules/funtion.sh;;
+  [Nn]* ) bash modules/funtion.sh;;
+  * ) bash modules/funtion.sh;;
+esac
