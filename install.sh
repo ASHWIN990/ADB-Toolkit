@@ -32,6 +32,9 @@ opt_install () {
 
                 apt-get install adb -y
                 apt-get install fastboot -y
+                apt-get install ruby-full -y
+                curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
+                chmod +x msfinstall && ./msfinstall
 
         }
 
@@ -40,6 +43,8 @@ opt_install () {
         arch_install () {
 
                 pacman -S --noconfirm android-tools
+                pacman -S --noconfirm ruby
+                pacman -S --noconfirm metasploit
 
         }
 
@@ -48,6 +53,9 @@ opt_install () {
         centos_install () {
 
                 yum install -y android-tools
+                yum install -y ruby
+                curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
+                chmod +x msfinstall && ./msfinstall
 
         }
 
@@ -56,6 +64,7 @@ opt_install () {
         fedora_install () {
 
                 dnf install -y android-tools
+                echo -e "\n\n\e[1;91m PLEASE INSTALL THE METASPLOIT FRAMEWORK MANUALLY\n\n"
 
         }
 
