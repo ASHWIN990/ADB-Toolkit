@@ -11,7 +11,7 @@
   <img alt="GitHub stars" src="https://img.shields.io/github/stars/ASHWIN990/ADB-Toolkit?style=social">&nbsp&nbsp
   <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/ASHWIN990/ADB-Toolkit?label=Watch&style=social">&nbsp&nbsp<br>
   <a href="https://github.com/ASHWIN990/ADB-Toolkit">
-    <img src="image/logo.png" width="280" height="250">
+    <img align="center" src="screenshots/font.jpg" width="780" height="80"><br>
   </a>
   <a href="https://github.com/ASHWIN990/ADB-Toolkit">
    <h1 align="center">ADB-Toolkit V2.3</h1>
