@@ -6,7 +6,6 @@
 [![Rawsec's CyberSecurity Inventory](https://inventory.rawsec.ml/img/badges/Rawsec-inventoried-FF5050_flat.svg)](https://inventory.rawsec.ml/tools.html#ADB-Toolkit)
 
 <p align="center">
-  <img alt="GitHub followers" src="https://img.shields.io/github/followers/ASHWIN990?label=ASHWIN990&style=social">&nbsp;&nbsp;
   <img alt="GitHub stars" src="https://img.shields.io/github/stars/ASHWIN990/ADB-Toolkit?style=social">&nbsp;&nbsp;
   <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/ASHWIN990/ADB-Toolkit?label=Watch&style=social">&nbsp;&nbsp;<br>
   <a href="https://github.com/ASHWIN990/ADB-Toolkit">
@@ -15,12 +14,10 @@
   <a href="https://github.com/ASHWIN990/ADB-Toolkit">
    <h1 align="center">ADB-Toolkit V2.3</h1>
   </a>
-
-  <p align="center">
-    Tool for testing your Android device and HaHaHack someone Android Phone ( Don't use with wrong intentions ) 🤘🤘 
-    <br />
+  <h4 align="center"><b>
+  Tool for testing your Android device and HaHaHack someone Android Phone ( Don't use with wrong intentions ) 🤘🤘 
+  </b></h4>
   </p>
-</p>
 
 
 **ADB-Toolkit is a BASH Script with 28 options and an METASPLOIT Section which has 6 options which is made to do easy penetration testing in Android Device.**
