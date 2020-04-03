@@ -6,11 +6,11 @@
 [![Rawsec's CyberSecurity Inventory](https://inventory.rawsec.ml/img/badges/Rawsec-inventoried-FF5050_flat.svg)](https://inventory.rawsec.ml/tools.html#ADB-Toolkit)
 
 <p align="center">
-  <img alt="GitHub followers" src="https://img.shields.io/github/followers/ASHWIN990?label=ASHWIN990&style=social">&nbsp&nbsp
-  <img alt="GitHub stars" src="https://img.shields.io/github/stars/ASHWIN990/ADB-Toolkit?style=social">&nbsp&nbsp
-  <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/ASHWIN990/ADB-Toolkit?label=Watch&style=social">&nbsp&nbsp<br>
+  <img alt="GitHub followers" src="https://img.shields.io/github/followers/ASHWIN990?label=ASHWIN990&style=social">&nbsp;&nbsp;
+  <img alt="GitHub stars" src="https://img.shields.io/github/stars/ASHWIN990/ADB-Toolkit?style=social">&nbsp;&nbsp;
+  <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/ASHWIN990/ADB-Toolkit?label=Watch&style=social">&nbsp;&nbsp;<br>
   <a href="https://github.com/ASHWIN990/ADB-Toolkit">
-    <img align="center" src="screenshots/font.jpg" width="780" height="80"><br>
+    <img align="center" src="screenshots/logo.png" width="780" height="80"><br>
   </a>
   <a href="https://github.com/ASHWIN990/ADB-Toolkit">
    <h1 align="center">ADB-Toolkit V2.3</h1>
