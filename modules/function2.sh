@@ -63,8 +63,8 @@ do
         "3") echo -e; bash modules/2opt3;;
         "4") echo -e; bash modules/2opt4;;
         "5") echo -e; bash modules/funtion.sh;;
-        "E") clean_exit;;
-        "e") clean_exit;;
+        "E") clean_exit; break;;
+        "e") clean_exit; break;;
 
         *) clear; revised="\e[1;4;91mENTER THE RIGHT OPTION BRO :-)\n"; option2_list;;
 
