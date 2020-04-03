@@ -5,7 +5,7 @@ clean_exit () {
   rm -rf $PWD/.temp/* &> /dev/null
   rm -rf $PWD/1 &> /dev/null
   rm -rf $PWD/2 &> /dev/null
-  clear && echo -e "\nCtrl-C caught...Performing Clean Up Thanks for Using.\n" && sleep 1s
+  clear && echo -e "\nCtrl-C caught...Performing Clean Up Thanks for Using.\n"
   echo -e "Exiting the ADB-Toolkit, Thanks for using."
   echo -e "\nDONE"
   exit 0
@@ -37,7 +37,7 @@ option2_list () {
         echo -e "\e[1;93m1.   \e[1;92mSHOW CONNECTED DEVICES"
         echo -e "\e[1;93m2.   \e[1;92mCREATE AND INSTALL METAPLOIT PAYLOAD \e[1;93m( .apk )"
         echo -e "\e[1;93m3.   \e[1;92mLAUNCH THE METASPLOIT PACKAGE \e[1;93m( .apk )"
-        echo -e "\n\e[1;93m4.   \e[1;91mLAUNCH THE METASPLOIT LISTNER \e[1;93m( .apk )"
+        echo -e "\n\e[1;93m4.   \e[1;92mLAUNCH THE METASPLOIT LISTNER \e[1;93m( .apk )"
         echo -e "\n\e[1;93m5.   \e[1;92mGO BACK TO ADB-Toolkit"
         echo -e "\e[1;93mE.   \e[1;92mEXIT or press Ctrl+c\n"
         echo $revised
