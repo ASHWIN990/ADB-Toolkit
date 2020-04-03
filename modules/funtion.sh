@@ -105,7 +105,7 @@ case $options in
   "22") echo -e; bash modules/opt22;;
   "23") echo -e; bash modules/opt23;;
   "24") echo -e; bash modules/opt24;;
-  "25") echo -e; bash modules/function2.sh;;
+  "25") echo -e; bash modules/function2.sh; break;;
   "26") echo -e; bash modules/opt26;;
   "27") echo -e; bash modules/opt27;;
   "28") echo -e; bash modules/opt28;;
