@@ -40,7 +40,7 @@ option2_list () {
         echo -e "\n\e[1;93m4.   \e[1;92mLAUNCH THE METASPLOIT LISTNER \e[1;93m( .apk )"
         echo -e "\n\e[1;93m5.   \e[1;92mGO BACK TO ADB-Toolkit"
         echo -e "\e[1;93mE.   \e[1;92mEXIT or press Ctrl+c\n"
-        echo $revised
+        echo -e $revised
         read -p $'\n\e[1;4;91mSELECT ONE OF THE OPTIONS WITH THE RESPECTED NUMBER\e[0m\e[24;1;97m : ' options2
 
 }
