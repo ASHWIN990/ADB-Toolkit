@@ -112,8 +112,8 @@ case $options in
   "29") echo -e; bash modules/opt29;;
   "A") echo -e; bash modules/about;;
   "a") echo -e; bash modules/about;;
-  "E") clean_exit;;
-  "e") clean_exit;;
+  "E") clean_exit; exit;;
+  "e") clean_exit; exit;;
 
   *) clear; revised="\e[1;4;91mENTER THE RIGHT OPTION BRO :-)\n"; option_list;;
 
