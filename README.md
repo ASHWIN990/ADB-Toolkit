@@ -75,6 +75,8 @@ Before using this tool you must enable Usb-Debugging from the devloper settings 
 
 ## Installation
 
+guys i suggest please reinstall the toolkit or git pull it for every new releases
+
 
 ```bash
 git clone https://github.com/ASHWIN990/ADB-Toolkit.git
