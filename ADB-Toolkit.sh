@@ -5,8 +5,27 @@
 #Written in Bash
 #"ONLY FOR EDUCATIONAL PURPOSE"
 
+current_version=2.32
 
 echo -e "ADB-Toolkit by ASHWINI SAHU\n\n"
+
+echo -e "Checking for new version\n\n"
+
+check_new_version () {
+
+    if ping -q -c 1 -W 1 google.com >/dev/null; then
+        checked_version=$(curl -s https://raw.githubusercontent.com/ASHWIN990/ADB-Toolkit/master/modules/version)
+        if [ "$checked_version" != "$current_version" ]
+            then
+                echo -e "Current Version = $current_version , New Version = $checked_version"
+                echo -e "\n\e[91;7mNew update is relased please update via git pull\e[27m\n"
+                sleep 5 | echo -e "\e[93;5mWait 5 second or update\e[0m"
+        fi
+    fi
+
+}
+
+check_new_version
 
 if [ $(id -u) -ne 0 ]; then
         echo "THIS SCRIPT MUST BE RAN AS ROOT"
