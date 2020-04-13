@@ -27,6 +27,13 @@ Note : I'm not responsible for any thing you do to anyone with this tool this do
 
 ## Changelogs
 
+### Changelog v2.32
+```
+Added vesion checking code
+Really big bug fixes
+Wiki in made
+```
+
 ### Changelog V2.3
 ```
 Added multi device support, now 3 
