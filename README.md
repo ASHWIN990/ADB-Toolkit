@@ -82,7 +82,7 @@ Before using this tool you must enable Usb-Debugging from the devloper settings 
 
 ## Installation
 
-guys i suggest please reinstall the toolkit or git pull it for every new releases
+guys i suggest, please,you reinstall the toolkit or git pull it for every new releases
 
 
 ```bash
@@ -95,18 +95,88 @@ sudo chmod +x install.sh
 sudo ./install.sh -i "or" sudo bash install.sh -i
 ```
 
-## Usage
 
-```bash
-sudo ./ADB-Toolkit.sh 
 
-or you can do
+## Launching ADB-Toolkit:
 
-sudo bash ADB-Toolkit.sh
+Usage of this tool is very easy as during the installation time, it gets aliases in the ~.bash_aliases file. So you can launch adb-toolkit from anywhere in the terminal
 
-or you can also do
+without going to the directory in which you git cloned the repo. There are actually three options for launching ADB-Toolkit: 
 
-sudo adb-toolkit any where in shell
+1. Go to the installation folder (directory of ADB-Toolkit) and type : sudo  ./ADB-Toolkit.sh
+
+2. Go to the installation folder (directory of ADB-Toolkit) and type : sudo  bash ADB-Toolkit.sh
+
+3. Type  sudo adb-toolkit  from anywhere in the shell. NB : sometimes, this option may not work. If that is the case, make sure you put the installation folder to your
+
+system path.
+
+When successfully launched, you will have a screen as bellow: 
+
+![](https://raw.githubusercontent.com/ASHWIN990/ADB-Toolkit/master/screenshots/git1.jpeg)
+
+
+
+## Enabling usb debugging on your device:
+
+To be able to connect adb-toolkit to your device , you need to enable usb debugging mode on your device first. 
+
+Enabling usb debugging mode depends on the type of phone you have, but the general is as follow:
+
+Settings > About Phone > Build Number (tap 7 times)> Developer Options >USB Debugging
+
+
+## Connecting adb-toolkit to your phone:
+
+After enabling usb debugging on your phone ,your are ready to use adb-toolkit for your forensics analysis.
+ 
+You have have two options for connecting adb-toolkit to your phone: 
+
+1. Connecting using usb cable: 
+
+	•Connect the phone to the workstation
+
+	•Launch adb-toolkit
+
+2. Connecting over wifi network:
+
+	•Make sure the phone and the workstation are on the same network
+
+	•Connect your phone to the workstation
+
+	•Open a terminal 
+
+	•Launch adb-toolkit and choose option 16  to establish remote connection with the phone
+
+	•You can now disconnect you the phone from the workstation
+
+
+## Doing analysis with adb-toolkit
+
+Now that everything is setup , you can enjoy your analysis with adb-toolkit.
+
+As you can see , there are almost 29 options
+
+![](https://raw.githubusercontent.com/ASHWIN990/ADB-Toolkit/master/screenshots/git1.jpeg)
+
+
+The program is very interactive and self-explanatory.
+
+To use one option just enter his number in the prompt and press enter.
+
+
+
+## Some tips for troubleshooting: 
+
+1. If you use the option 28 to hang the phone , you have to use the option 3 or hold down the power button for 10 seconds to reboot before you can have access to the device
+
+2. To launch an application(option 26), you have to use the exact name of the package as it appear when you use option 14
+
+3. All data are stored in your installation folder
+
+4. You may use option 2 to restart adb server whenever your workstation is unable to join the phone via wifi
+
+
 ```
 ## ADB-Toolkit Screenshot
 
