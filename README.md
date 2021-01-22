@@ -122,6 +122,10 @@ sudo adb-toolkit any where in shell
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
+## Support Me
+
+<a href="https://www.buymeacoffee.com/ashwinisahu" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
 ## Author
 
 * **ASHWINI SAHU** - *WHOLE WORK* - (https://github.com/ASHWIN990)
