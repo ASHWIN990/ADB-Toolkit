@@ -15,7 +15,6 @@
   <a href="https://github.com/ASHWIN990/ADB-Toolkit">
     <!--<img align="center" src="screenshots/logo.png" width="780" height="80"><br>-->
     <img align="center" src="https://raw.githubusercontent.com/ASHWIN990/ADB-Toolkit/master/screenshots/ADB-Toolkit-Banner.png" alt="ADB-Toolkit-Banner" border="0" height="320px" width="640"></a><br>
-  </a>
   <a href="https://github.com/ASHWIN990/ADB-Toolkit">
    <h1 align="center">ADB-Toolkit V2.3</h1>
   </a>
