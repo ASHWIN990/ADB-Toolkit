@@ -61,7 +61,7 @@ remote_shell () {
 dev_1_remo () {
 
               devvv=$(echo "$dev_1")
-              echo -e "\n\e[1;93mMake sure that the device \e[1;91m$mod_1 \e[1;93mis connected to the same network in which ADB-Tookit is installed.\n"
+              echo -e "\n\e[1;93mMake sure that the device \e[1;91m$mod_1 \e[1;93mis connected to the same network in which ADB-Toolkit is installed.\n"
               ip_finder
               adb -s $dev_1 tcpip 5555 > /dev/null 2>&1
               connect_msg=$(adb -s $dev_1 connect $dev_ip) > /dev/null 2>&1
@@ -79,7 +79,7 @@ dev_1_remo () {
 dev_2_remo () {
 
               devvv=$(echo "$dev_2")
-              echo -e "\n\e[1;93mMake sure that the device \e[1;91m$mod_2 \e[1;93mis connected to the same network in which ADB-Tookit is installed.\n"
+              echo -e "\n\e[1;93mMake sure that the device \e[1;91m$mod_2 \e[1;93mis connected to the same network in which ADB-Toolkit is installed.\n"
               ip_finder
               adb -s $dev_2 tcpip 5555 > /dev/null 2>&1
               connect_msg=$(adb -s $dev_2 connect $dev_ip) > /dev/null 2>&1
@@ -98,7 +98,7 @@ dev_2_remo () {
 dev_3_remo () {
 
               devvv=$(echo "$dev_3")
-              echo -e "\n\e[1;93mMake sure that the device \e[1;91m$mod_3 \e[1;93mis connected to the same network in which ADB-Tookit is installed.\n"
+              echo -e "\n\e[1;93mMake sure that the device \e[1;91m$mod_3 \e[1;93mis connected to the same network in which ADB-Toold 3 months ago by ASHWIN990kit is installed.\n"
               ip_finder
               adb -s $dev_3 tcpip 5555 > /dev/null 2>&1
               connect_msg=$(adb -s $dev_3 connect $dev_ip) > /dev/null 2>&1
