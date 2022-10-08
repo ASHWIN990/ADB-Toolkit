@@ -40,8 +40,10 @@ dev_1_screenrecord () {
 
                 export devv=$(echo $dev_1)
                 export model=$(echo $mod_1)
-                export time=$(date +"%T")
-                sc_name=$(echo "$mod_1-screenshot-$time")
+                export time=$(date +"%H-%M-%S")
+
+                # sc_name=$(echo "$mod_1-screenshot-$time")
+                sc_name=$(echo "screenrecord-$time")
                 bash screenrecord/.screenrecord.sh $sc_name
 
 }
@@ -50,8 +52,10 @@ dev_2_screenrecord () {
 
                 export devv=$(echo $dev_2)
                 export model=$(echo $mod_2)
-                export time=$(date +"%T")
-                sc_name=$(echo "$mod_2-screenshot-$time")
+                export time=$(date +"%H-%M-%S")
+
+                # sc_name=$(echo "$mod_2-screenshot-$time")
+                sc_name=$(echo "screenrecord-$time")
                 bash screenrecord/.screenrecord.sh $sc_name
 }
 
@@ -59,8 +63,9 @@ dev_3_screenrecord () {
 
                 export devv=$(echo $dev_3)
                 export model=$(echo $mod_3)
-                export time=$(date +"%T")
-                sc_name=$(echo "$mod_3-screenshot-$time")
+                export time=$(date +"%H-%M-%S")
+                # sc_name=$(echo "$mod_3-screenshot-$time")
+                sc_name=$(echo "screenrecord-$time")
                 bash screenrecord/.screenrecord.sh $sc_name
 
 }

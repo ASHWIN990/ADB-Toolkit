@@ -6,7 +6,7 @@ IFS=$'\n\t'
 function takeScreenshot(){
     echo -e "\e[1;93mTaking screenshot '${FILENAME}'...\n\e[91m"
     adb -s $devv shell screencap -p /sdcard/${FILENAME}
-	echo -e "\e[1;92mProcess complete.\n"
+    echo -e "\e[1;92mProcess complete.\n"
 }
 
 function pullScreenshot(){

@@ -5,7 +5,7 @@ IFS=$'\n\t'
 
 function recordScreen(){
 	echo -e "\e[1;92mRecordingthe screen to '${FILENAME}'...\n\e[91m"
-	adb shell screenrecord /sdcard/${FILENAME} &
+	adb shell screenrecord /sdcard/${FILENAME} & 
 	_PID=$!
 
 	read -r -p $'\e[1;91mPress \e[1;91m[Enter] \e[1;93mto stop recording...'
