@@ -41,7 +41,7 @@ option2_list () {
         echo -e "\n\e[1;93m5.   \e[1;92mGO BACK TO ADB-Toolkit"
         echo -e "\e[1;92mEXIT or press Ctrl+c\n"
         echo -e $revised
-        read -p $'\n\e[1;4;91mSELECT ONE OF THE OPTIONS WITH THE RESPECTED NUMBER\e[0m\e[24;1;97m : ' options2
+        read -p $'\n\e[1;4;91mSELECT ONE OF THE OPTIONS WITH THE RESPECTIVE NUMBER\e[0m\e[24;1;97m : ' options2
 
 }
 
