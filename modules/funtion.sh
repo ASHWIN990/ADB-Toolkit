@@ -65,7 +65,7 @@ echo -e "\e[1;93m21.  \e[1;92mCOPY ALL WHATSAPP DATA"
 echo -e "\e[1;93m22.  \e[1;92mCOPY ALL DEVICE STORAGE ( Takes time )           \e[1;93mA.  \e[1;92mABOUT AUTHOUR "
 echo -e "\e[1;93m23.  \e[1;92mCOPY A SPECIFIED FILE OR FOLDER                  \e[1;91mEXIT or press Ctrl+c\n"
 echo -e $revised
-read -p $'\e[1;4;91mSELECT ONE OF THE OPTIONS WITH THE RESPECTED NUMBER\e[0m\e[24;1;97m : ' options
+read -p $'\e[1;4;91mSELECT ONE OF THE OPTIONS WITH THE RESPECTIVE NUMBER\e[0m\e[24;1;97m : ' options
  
 }
 
