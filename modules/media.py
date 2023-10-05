@@ -3,9 +3,7 @@
 from utils.utils import *
 import adbutils
 import os
-from datetime import datetime
 import time
-
 
 def get_screenshot(device, path):
 
@@ -14,9 +12,8 @@ def get_screenshot(device, path):
             raise Exception("No devices connected")
         if not os.path.exists(path):
             raise Exception("Path not found")
-
-        curr_datetime = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-        abspath = os.path.join(path, curr_datetime+".png")
+        
+        abspath = get_timestamp_filename(path, ".png")
 
         device = adbutils.adb.device(device)
 
@@ -41,24 +38,32 @@ def get_screenrecord(device, path, sec=0):
         if not os.path.exists(path):
             raise Exception("Path not found")
 
-        curr_datetime = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-        abspath = os.path.join(path, curr_datetime+".mp4")
-
+        abspath = get_timestamp_filename(path, ".mp4")
+        abspath_dev=(f"/sdcard/{os.path.basename(abspath)}")
         device = adbutils.adb.device(device)
 
         if os.path.exists(abspath):
             os.remove(abspath)
 
-        device.start_recording(abspath)
-
+        _ = device.shell(["screenrecord", abspath_dev], stream=True)
+        pid = get_process_pid(device.serial, f"screenrecord {abspath_dev}")
+        
+        if pid == "":
+            raise Exception("Screenrecord PID not found")
+                
         if sec != 0:
             time.sleep(sec)
-        if sec == 0:
+        elif sec == 0:
             printInfo("Press Enter to stop recording...", end="")
             input()
-
-        device.stop_recording()
-
+            
+        print(device.shell(f"kill -9 {' '.join(pid)}"))
+        if not device.sync.exists(abspath_dev):
+            raise Exception("Screenrecord file not found")
+        
+        device.sync.pull(abspath_dev, abspath)
+        device.remove(abspath_dev)
+        
         return True, abspath
 
     except Exception as e:

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+import warnings
+warnings.filterwarnings("ignore")
 import adbutils
 import os
 from utils.utils import *
@@ -25,10 +26,12 @@ def setup():
         os.mkdir(DUMP_SCREENRECORD)
 
 def main():
-    devices = get_devices()        
-    # print(get_screenshot(devices[1], DUMP_SCREENSHOT))
-    print(get_screenrecord(devices[0], DUMP_SCREENRECORD, 0))
-
+    try:        
+        devices = get_devices()
+        # print(get_screenshot(devices[0], DUMP_SCREENSHOT))
+        print(get_screenrecord(devices[0].serial, DUMP_SCREENRECORD, 0))
+    except Exception as e:
+        printError(e, "j")
 
 if __name__ == "__main__":
     setup()

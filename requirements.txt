@@ -1,0 +1,2 @@
+adbutils
+colorama

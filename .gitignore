@@ -1,4 +1,4 @@
 dump/*
 .vscode/*
-
+env/*
 */__pycache__/*
