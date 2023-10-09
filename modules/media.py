@@ -45,8 +45,10 @@ def get_screenrecord(device, path, sec=0):
         if os.path.exists(abspath):
             os.remove(abspath)
 
-        _ = device.shell(["screenrecord", abspath_dev], stream=True)
-        pid = get_process_pid(device.serial, f"screenrecord {abspath_dev}")
+        # _ = device.shell(f"screenrecord {abspath_dev}", stream=True)
+        _ = device.shell(f"while true; do 'screenrecord --bit-rate=16m --output-format=h264 --time-limit 180 {abspath_dev}'; done | ffplay -framerate 60 -framedrop -bufsize 16M {abspath_dev}", stream=True)
+        
+        pid = get_process_pid(device.serial, f"screenrecord")
         
         if pid == "":
             raise Exception("Screenrecord PID not found")
@@ -57,7 +59,7 @@ def get_screenrecord(device, path, sec=0):
             printInfo("Press Enter to stop recording...", end="")
             input()
             
-        print(device.shell(f"kill -9 {' '.join(pid)}"))
+        print(device.shell(f"kill -2 {' '.join(pid)}"))
         if not device.sync.exists(abspath_dev):
             raise Exception("Screenrecord file not found")
         
