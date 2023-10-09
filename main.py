@@ -29,9 +29,9 @@ def main():
     try:        
         devices = get_devices()
         # print(get_screenshot(devices[0], DUMP_SCREENSHOT))
-        print(get_screenrecord(devices[0].serial, DUMP_SCREENRECORD, 0))
+        print(get_screenrecord(devices[0].serial, DUMP_SCREENRECORD))
     except Exception as e:
-        printError(e, "j")
+        printError(e)
 
 if __name__ == "__main__":
     setup()

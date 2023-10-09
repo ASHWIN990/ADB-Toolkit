@@ -1,6 +1,8 @@
-import adbutils, os
+import adbutils
+import os
 from colorama import Fore, Back, Style
 from datetime import datetime
+
 
 def get_devices():
     try:
@@ -14,14 +16,15 @@ def get_devices():
         print("Error: ", e)
         return []
 
+
 def get_timestamp_filename(path, ext, no_abs=False):
-    
+
     try:
         if not os.path.exists(path):
             raise Exception("Path not found")
 
         curr_datetime = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-        
+
         if no_abs:
             return curr_datetime+ext
         else:
@@ -31,6 +34,7 @@ def get_timestamp_filename(path, ext, no_abs=False):
         printError(e)
         return ""
 
+
 def get_process_pid(device, process_name):
     try:
         if device == None:
@@ -39,7 +43,7 @@ def get_process_pid(device, process_name):
             raise Exception("Process name is empty")
 
         device = adbutils.adb.device(device)
-        pid = list(map(str, device.shell(f"pidof {process_name}").split()))
+        pid = list(map(str, device.shell(f'pidof "{process_name}"').split()))
         return pid
     except Exception as e:
         printError(e)
@@ -47,23 +51,20 @@ def get_process_pid(device, process_name):
 
 ######## Print ########
 
-def printError(e, **kwargs):
-    print(
-        f"{Style.BRIGHT} {Fore.RED} [Error] :{Style.RESET_ALL} {e}", **kwargs)
+
+def printError(e):
+    print(f"{Style.BRIGHT} {Fore.RED} [Error] :{Style.RESET_ALL} {e}")
 
 
-def printInfo(i, **kwargs):
-    print(
-        f"{Style.BRIGHT} {Fore.BLUE} [Info] :{Style.RESET_ALL} {i}", **kwargs)
+def printInfo(i):
+    print(f"{Style.BRIGHT} {Fore.BLUE} [Info] :{Style.RESET_ALL} {i}")
 
 
-def printWarning(w, **kwargs):
-    print(
-        f"{Style.BRIGHT} {Fore.YELLOW} [Warning] :{Style.RESET_ALL} {w}", **kwargs)
+def printWarning(w):
+    print(f"{Style.BRIGHT} {Fore.YELLOW} [Warning] :{Style.RESET_ALL} {w}")
 
 
-def printSuccess(s, **kwargs):
-    print(
-        f"{Style.BRIGHT} {Fore.GREEN} [Success] :{Style.RESET_ALL} : {s}", **kwargs)
+def printSuccess(s):
+    print(f"{Style.BRIGHT} {Fore.GREEN} [Success] :{Style.RESET_ALL} : {s}")
 
 ######## Print ########
