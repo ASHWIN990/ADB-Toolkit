@@ -52,19 +52,21 @@ def get_process_pid(device, process_name):
 ######## Print ########
 
 
-def printError(e):
-    print(f"{Style.BRIGHT} {Fore.RED} [Error] :{Style.RESET_ALL} {e}")
+def printError(e, end="\n"):
+    print(f"{Style.BRIGHT} {Fore.RED} [Error] :{Style.RESET_ALL} {e}", end=end)
 
 
-def printInfo(i):
-    print(f"{Style.BRIGHT} {Fore.BLUE} [Info] :{Style.RESET_ALL} {i}")
+def printInfo(i, end="\n"):
+    print(f"{Style.BRIGHT} {Fore.BLUE} [Info] :{Style.RESET_ALL} {i}", end=end)
 
 
-def printWarning(w):
-    print(f"{Style.BRIGHT} {Fore.YELLOW} [Warning] :{Style.RESET_ALL} {w}")
+def printWarning(w, end="\n"):
+    print(
+        f"{Style.BRIGHT} {Fore.YELLOW} [Warning] :{Style.RESET_ALL} {w}", end=end)
 
 
-def printSuccess(s):
-    print(f"{Style.BRIGHT} {Fore.GREEN} [Success] :{Style.RESET_ALL} : {s}")
+def printSuccess(s, end="\n"):
+    print(
+        f"{Style.BRIGHT} {Fore.GREEN} [Success] :{Style.RESET_ALL} : {s}", end=end)
 
 ######## Print ########

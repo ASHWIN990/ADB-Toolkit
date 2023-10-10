@@ -28,8 +28,9 @@ def setup():
 def main():
     try:        
         devices = get_devices()
-        # print(get_screenshot(devices[0], DUMP_SCREENSHOT))
-        print(get_screenrecord(devices[0].serial, DUMP_SCREENRECORD))
+        media = Media(devices[0].serial)
+        # printInfo(media.screenshot(DUMP_SCREENSHOT))
+        printInfo(media.screenrecord(DUMP_SCREENRECORD))
     except Exception as e:
         printError(e)
 
