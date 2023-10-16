@@ -17,9 +17,6 @@ class Media:
     def __init__(self, device):
         self.device = adbutils.adb.device(device)
 
-    def show(self):
-        print(self.device)
-
     def screenshot(self, path):
 
         try:
