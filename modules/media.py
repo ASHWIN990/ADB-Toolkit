@@ -109,7 +109,6 @@ class Media:
                     raise Exception("Screenrecord file not found")
                 self.device.remove(abspath_dev)
 
-
         except Exception as e:
             printError(e)
             return False, ""
