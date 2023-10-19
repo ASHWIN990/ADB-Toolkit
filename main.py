@@ -6,6 +6,7 @@ import adbutils
 import os
 from utils.utils import *
 from modules.media import *
+from modules.system import *
 
 DUMP_PATH = "dump"
 DUMP_PATH = os.path.join(os.getcwd(), DUMP_PATH)
@@ -28,9 +29,13 @@ def setup():
 def main():
     try:        
         devices = get_devices()
+        if devices == []:
+            raise Exception("No devices connected")
         media = Media(devices[0].serial)
         # printInfo(media.screenshot(DUMP_SCREENSHOT))
-        printInfo(media.screenrecord(DUMP_SCREENRECORD))
+        # printInfo(media.screenrecord(DUMP_SCREENRECORD))
+        system(devices[0].serial)
+        
     except Exception as e:
         printError(e)
 

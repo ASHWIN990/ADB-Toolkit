@@ -1,8 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import adbutils
 import os
 from colorama import Fore, Back, Style
 from datetime import datetime
-
 
 def get_devices():
     try:
@@ -13,7 +15,7 @@ def get_devices():
         else:
             return devices
     except Exception as e:
-        print("Error: ", e)
+        printError(e)
         return []
 
 
@@ -53,20 +55,20 @@ def get_process_pid(device, process_name):
 
 
 def printError(e, end="\n"):
-    print(f"{Style.BRIGHT} {Fore.RED} [Error] :{Style.RESET_ALL} {e}", end=end)
+    print(f"{Style.BRIGHT}{Fore.RED}[Error] :{Style.RESET_ALL} {e}", end=end)
 
 
 def printInfo(i, end="\n"):
-    print(f"{Style.BRIGHT} {Fore.BLUE} [Info] :{Style.RESET_ALL} {i}", end=end)
+    print(f"{Style.BRIGHT}{Fore.BLUE}[Info] :{Style.RESET_ALL} {i}", end=end)
 
 
 def printWarning(w, end="\n"):
     print(
-        f"{Style.BRIGHT} {Fore.YELLOW} [Warning] :{Style.RESET_ALL} {w}", end=end)
+        f"{Style.BRIGHT}{Fore.YELLOW}[Warning] :{Style.RESET_ALL} {w}", end=end)
 
 
 def printSuccess(s, end="\n"):
     print(
-        f"{Style.BRIGHT} {Fore.GREEN} [Success] :{Style.RESET_ALL} : {s}", end=end)
+        f"{Style.BRIGHT}{Fore.GREEN}[Success] :{Style.RESET_ALL} : {s}", end=end)
 
 ######## Print ########
